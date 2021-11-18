@@ -70,9 +70,10 @@ void FindAllConfig::SetInstantLoad(bool value)
 }
 void FindAllConfig::SetWritePeriod(uint32_t milliseconds)
 {
-    if (mSettings.WritePeriod != milliseconds)
+    uint32_t newPeriod = min(300000, milliseconds);
+    if (mSettings.WritePeriod != newPeriod)
     {
-        mSettings.WritePeriod = milliseconds;
+        mSettings.WritePeriod = newPeriod;
         ConfigLoader::pLoader->SaveSettings();
     }
 }

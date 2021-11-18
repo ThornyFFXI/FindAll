@@ -1,0 +1,61 @@
+<html>
+    <title>FindAll Readme</title>
+    <body style="background-color:#000000">
+        <h1 style="color:#FF7903">Summary</h1>
+        <p style="color:#FFFFFF">FindAll is a plugin that provides inventory cacheing.  In addition to the obvious function of locating items on various characters, FindAll can cache your local character's inventory so that it loads instantly upon zoning.
+        Both of these functions are disabled until you've allowed the client to fully load inventory once.  If you change to another character on the same account, you will once again have to wait until inventory fully loads for your own safety.  Note that if you have
+    FindAll on autoload, the initial zonein counts as long as you allow inventory to fully load before zoning again.  You can search before these conditions are met, but new items will not be cached on a fresh login until inventory has fully loaded once.  Note that
+in addition to the typed commands, you may double click a search's tab in ImGui mode to close only that search.</p><br>
+    
+    <h1 style="color:#FF7903">Commands</h1>
+    <p style="color:#FFFFFF">These commands should be typed directly into the FFXI console.  They can all be prefixed with <font color="#0080FF">/fa</font> or <font color="#0080FF">/findall</font>.</p><br>
+
+    <font color="#FFFFFF">Syntax: </font><font color="#0080FF">/fa config instantload </font><font color="#FFFFFF">[Optional: <font color="#E6BF00">on/off/disabled/enabled</font>]<br>
+    <font color="#FFFFFF">Arguments:</font><br>
+    <font color="#E6BF00">on/off/enabled/disabled</font><font color="#FFFFFF">: Determines the state to put the InstantLoad setting in.</font><br>
+    <font color="#FFFFFF">Effects: Allows the user to toggle whether instant inventory loading will be used.  If a state is not specified, will alternate.</font><br>
+    <font color="#FFFFFF">Example Syntax: </font><font color="#0080FF">/fa config instantload disabled</font><br>
+    <br><br>
+
+    <font color="#FFFFFF">Syntax: </font><font color="#0080FF">/fa config cachetodisc </font><font color="#FFFFFF">[Optional: <font color="#E6BF00">on/off/disabled/enabled</font>]<br>
+    <font color="#FFFFFF">Arguments:</font><br>
+    <font color="#E6BF00">on/off/enabled/disabled</font><font color="#FFFFFF">: Determines the state to put the CacheToDisc setting in.</font><br>
+    <font color="#FFFFFF">Effects: Allows the user to toggle whether the current character's inventory will be backed up for searching.  You can still search other characters on a character that isn't making backups.    If a state is not specified, will alternate.</font><br>
+    <font color="#FFFFFF">Example Syntax: </font><font color="#0080FF">/fa config cachetodisc enabled</font><br>
+    <br><br>
+
+    <font color="#FFFFFF">Syntax: </font><font color="#0080FF">/fa config displaymax </font><font color="#FFFFFF">[Required: <font color="#208020">maximum</font>]<br>
+    <font color="#FFFFFF">Arguments:</font><br>
+    <font color="#208020">maximum</font><font color="#FFFFFF">: New amount of search results to limit.  Must be between 1 and 20.</font><br>
+    <font color="#FFFFFF">Effects: Allows the user to change how many search results will display in ImGui mode.</font><br>
+    <font color="#FFFFFF">Example Syntax: </font><font color="#0080FF">/fa config displaymax 8</font><br>
+    <br><br>
+    
+
+    <font color="#FFFFFF">Syntax: </font><font color="#0080FF">/fa config displaymode </font><font color="#FFFFFF">[Optional: <font color="#E6BF00">imgui/chatlog</font>]<br>
+    <font color="#FFFFFF">Arguments:</font><br>
+    <font color="#E6BF00">imgui/chatlog</font><font color="#FFFFFF">: Determines the state to put the DisplayMode setting in.</font><br>
+    <font color="#FFFFFF">Effects: Changes the display mode.  If a mode is not specified, will alternate.</font><br>
+    <font color="#FFFFFF">Example Syntax: </font><font color="#0080FF">/fa config displaymode imgui</font><br>
+    <br><br>
+
+    <font color="#FFFFFF">Syntax: </font><font color="#0080FF">/fa config writedelay </font><font color="#FFFFFF">[Required: <font color="#208020">delay</font>]<br>
+    <font color="#FFFFFF">Arguments:</font><br>
+    <font color="#208020">delay</font><font color="#FFFFFF">: The minimum length of time, in milliseconds, FindAll will wait before writing inventory changes to disc when CacheToDisc is enabled.  Must be between 0 and 300000.</font><br>
+    <font color="#FFFFFF">Effects: Changes the amount of time after an inventory change before it is cached to disc.  This is used so that frequent inventory changes do not each require a disc write.</font><br>
+    <font color="#FFFFFF">Example Syntax: </font><font color="#0080FF">/fa config writedelay 20000</font><br>
+    <br><br>
+
+    <font color="#FFFFFF">Syntax: </font><font color="#0080FF">/fa clear</font><br>
+    <font color="#FFFFFF">Arguments: N/A</font><br>
+    <font color="#FFFFFF">Effects: Clears all searches that are currently displayed in the ImGui element.  Does nothing in chatlog displaymode.</font><br>
+    <font color="#FFFFFF">Example Syntax: </font><font color="#0080FF">/fa clear</font><br>
+    <br><br>
+
+    <font color="#FFFFFF">Syntax: </font><font color="#0080FF">/fa search </font><font color="#FFFFFF">[Required: <font color="#208020">Search Term</font>]<br>
+    <font color="#FFFFFF">Arguments:</font><br>
+    <font color="#208020">Search Term</font><font color="#FFFFFF">: An item to search for.  You can specify item ID, item name, or a wildcard string that will represent multiple item names.</font><br>
+    <font color="#FFFFFF">Effects: Searches all character caches and your local character for instances of the items and displays the results according to the current display mode.  Be aware that an extremely broad search(such as <font color="#0080FF">/fa search *</font>) may crash or lag the client in chatlog mode due to the volume of data being printed.</font><br>
+    <font color="#FFFFFF">Example Syntax: </font><font color="#0080FF">/fa search *crystal</font><br>
+    </body>
+</html>

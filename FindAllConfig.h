@@ -25,8 +25,8 @@ struct FindAllSettings_t
         : CacheToDisc(true)
         , DisplayMax(8)
         , DisplayMode(FindAllDisplayMode::ImGui)
-        , InstantLoad(true)
-        , WritePeriod(5000)
+        , InstantLoad(false)
+        , WritePeriod(20000)
     {}
 };
 
