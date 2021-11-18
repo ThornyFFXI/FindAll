@@ -36,6 +36,6 @@ Changes the amount of time, in milliseconds. after an inventory change before it
 Clears all searches that are currently displayed in the ImGui element. Does nothing in chatlog displaymode.<br><br>
 
 **/fa search [Required: Search Term]**<br>
-Effects: Searches all character caches and your local character for instances of the items and displays the results according to the current display mode.
+Searches all character caches and your local character for instances of the items and displays the results according to the current display mode.
 Term can be an item ID, item name, or a wildcard string that will represent multiple item names.
 Be aware that an extremely broad search(such as **/fa search \***) may crash or lag the client in chatlog mode due to the volume of data being printed.
