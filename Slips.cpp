@@ -7,7 +7,7 @@ void FindAll::LoadSlipData()
     std::ifstream inputStream = ifstream(path, ios::in | ios::binary | ios::ate);
     if (!inputStream.is_open())
     {
-        m_AshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Failed to read file: $H%s$R", path).c_str());
+        OutputHelper::Outputf(Ashita::LogLevel::Error, "Failed to read file: $H%s$R", path);
         return;
     }
 
@@ -27,7 +27,7 @@ void FindAll::LoadSlipData()
         if (buffer != nullptr)
             delete[] buffer;
 
-        m_AshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Exception while reading $H%s$R: %s$H%s$R", path, e.what()).c_str());
+                    OutputHelper::Outputf(Ashita::LogLevel::Error, "Exception while reading $H%s$R: %s$H%s$R", path, e.what());
         return;
     }
     catch (...)
@@ -35,7 +35,7 @@ void FindAll::LoadSlipData()
         if (buffer != nullptr)
             delete[] buffer;
 
-        m_AshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Unknown exception while reading file: $H%s$R", path).c_str());
+                    OutputHelper::Outputf(Ashita::LogLevel::Error, "Unknown exception while reading file: $H%s$R", path);
         return;
     }
 
@@ -47,15 +47,15 @@ void FindAll::LoadSlipData()
     catch (const rapidxml::parse_error& e)
     {
         int line = static_cast<long>(std::count(buffer, e.where<char>(), '\n') + 1);
-        m_AshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Parse error while evaluating $H%s$R on line $H%d$R.", path, line).c_str());
-        m_AshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Error message: %H%s$R", e.what()).c_str());
+        OutputHelper::Outputf(Ashita::LogLevel::Error, "Parse error while evaluating $H%s$R on line $H%d$R.", path, line);
+        OutputHelper::Outputf(Ashita::LogLevel::Error, "Error message: %H%s$R", e.what());
         delete pDocument;
         delete[] buffer;
         return;
     }
     catch (...)
     {
-        m_AshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Parse error while evaluating $H%s$R.  No message specified.", path).c_str());
+        OutputHelper::Outputf(Ashita::LogLevel::Error, "Parse error while evaluating $H%s$R.  No message specified.", path);
         delete pDocument;
         delete[] buffer;
         return;

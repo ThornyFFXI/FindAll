@@ -59,7 +59,7 @@ void InventoryCache::HandleIncomingPacket(uint16_t id, uint32_t size, const uint
                 }
                 else
                 {
-                    pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Failed to write file: $H%s$R", mFilePath).c_str());
+                    OutputHelper::Outputf(Ashita::LogLevel::Error, "Failed to write file: $H%s$R", mFilePath);
                 }
             }
 
@@ -199,7 +199,7 @@ void InventoryCache::HandleTick()
             }
             else
             {
-                pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Failed to write file: $H%s$R", mFilePath).c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Error, "Failed to write file: $H%s$R", mFilePath);
             }
         }
     }
@@ -239,7 +239,7 @@ void InventoryCache::CreateDirectories(const char* fileName)
         std::string currentDirectory = makeDirectory.substr(0, nextDirectory + 1);
         if ((!CreateDirectory(currentDirectory.c_str(), NULL)) && (ERROR_ALREADY_EXISTS != GetLastError()))
         {
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Failed to create directory: $H%s$R", currentDirectory.c_str()).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Failed to create directory: $H%s$R", currentDirectory.c_str());
             return;
         }
         nextDirectory = makeDirectory.find("\\", nextDirectory + 1);
@@ -356,7 +356,7 @@ void QueriableCache::LoadAll(IAshitaCore* pAshitaCore, std::vector<QueriableCach
         QueriableCache* pCache = new QueriableCache(iter->c_str());
         if (!pCache->IsLoaded())
         {
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Failed to load file: $H%s", iter->c_str()).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Failed to load file: $H%s", iter->c_str());
             delete pCache;
         }
         else

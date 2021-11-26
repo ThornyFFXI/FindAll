@@ -1,4 +1,5 @@
 #include "FindAll.h"
+OutputHelper* OutputHelper::pOutputHelper = nullptr;
 
 __declspec(dllexport) IPlugin* __stdcall expCreatePlugin(const char* args)
 {
@@ -19,6 +20,7 @@ bool FindAll::Initialize(IAshitaCore* core, ILogManager* logger, const uint32_t 
     m_PluginId   = id;
     mPending.State = (uint32_t)SearchState::Idle;
 
+    OutputHelper::Initialize(core, logger, "FindAll");
     ConfigLoader::pLoader = new ConfigLoader(core, &mConfig);
     pCache       = new InventoryCache(core, &mConfig);
     LoadSlipData();
@@ -29,6 +31,7 @@ void FindAll::Release(void)
 {
     m_AshitaCore->GetFontManager()->Delete("FindAll_Display");
     delete pCache;
+    OutputHelper::Destroy();
 }
 
 bool FindAll::HandleCommand(int32_t mode, const char* command, bool injected)
@@ -75,7 +78,7 @@ void FindAll::Direct3DPresent(const RECT* pSourceRect, const RECT* pDestRect, HW
     {
         if (mPending.pSearch == nullptr)
         {
-            m_AshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Could not find any items matching the term: $H%s$R.", mPending.Term).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Could not find any items matching the term: $H%s$R.", mPending.Term);
         }
         else
         {

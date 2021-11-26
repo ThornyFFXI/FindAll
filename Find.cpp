@@ -5,7 +5,7 @@ uint32_t FindAll::ThreadEntry()
     std::vector<SearchItem_t> items = GetMatchingItems(mPending.Term);
     if (items.size() == 0)
     {
-        m_AshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Could not find any item IDs matching the term: $H%s$R.", mPending.Term).c_str());
+        OutputHelper::Outputf(Ashita::LogLevel::Error, "Could not find any item IDs matching the term: $H%s$R.", mPending.Term);
         InterlockedExchange(&mPending.State, (uint32_t)SearchState::Idle);
         return 0;
     }
@@ -77,7 +77,7 @@ void FindAll::FindAcrossCharacters(const char* term)
 {
     if (InterlockedCompareExchange(&mPending.State, (uint32_t)SearchState::InProgress, (uint32_t)SearchState::Idle) != (uint32_t)(uint32_t)SearchState::Idle)
     {
-        m_AshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Currently processing a search: $H%s$R.", mPending.Term).c_str());
+        OutputHelper::Outputf(Ashita::LogLevel::Error, "Currently processing a search: $H%s$R.", mPending.Term);
         return;
     }
     strcpy_s(mPending.Term, 256, term);

@@ -20,7 +20,7 @@ void FindAll::HandleCommandInternal(std::vector<std::string> args, int argCount)
             {
                 mConfig.SetInstantLoad(!mConfig.GetInstantLoad());
             }
-            m_AshitaCore->GetChatManager()->Write(0, false, Output::Messagef("InstantLoad $H%s$R.", mConfig.GetInstantLoad() ? "Enabled" : "Disabled").c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Info, "InstantLoad $H%s$R.", mConfig.GetInstantLoad() ? "Enabled" : "Disabled");
             return;
         }
 
@@ -38,7 +38,7 @@ void FindAll::HandleCommandInternal(std::vector<std::string> args, int argCount)
             {
                 mConfig.SetCacheToDisc(!mConfig.GetCacheToDisc());
             }
-            m_AshitaCore->GetChatManager()->Write(0, false, Output::Messagef("CacheToDisc $H%s$R.", mConfig.GetCacheToDisc() ? "Enabled" : "Disabled").c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Info, "CacheToDisc $H%s$R.", mConfig.GetCacheToDisc() ? "Enabled" : "Disabled");
             return;
         }
 
@@ -47,7 +47,7 @@ void FindAll::HandleCommandInternal(std::vector<std::string> args, int argCount)
             if (argCount > 3)
             {
                 mConfig.SetDisplayMax(atoi(args[3].c_str()));
-                m_AshitaCore->GetChatManager()->Write(0, false, Output::Messagef("DisplayMax set to $H%d$R.", mConfig.GetDisplayMax()).c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Info, "DisplayMax set to $H%d$R.", mConfig.GetDisplayMax());
             }
             return;
         }
@@ -72,9 +72,9 @@ void FindAll::HandleCommandInternal(std::vector<std::string> args, int argCount)
             }
 
             if (mConfig.GetDisplayMode() == FindAllDisplayMode::ImGui)
-                m_AshitaCore->GetChatManager()->Write(0, false, Output::Message("DisplayMode set to $HImGui$R.").c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Info, "DisplayMode set to $HImGui$R.");
             else
-                m_AshitaCore->GetChatManager()->Write(0, false, Output::Message("DisplayMode set to $HChat Log$R.").c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Info, "DisplayMode set to $HChat Log$R.");
             return;
         }
 
@@ -83,7 +83,7 @@ void FindAll::HandleCommandInternal(std::vector<std::string> args, int argCount)
             if (argCount > 3)
             {
                 mConfig.SetWritePeriod(static_cast<uint32_t>(atoll(args[3].c_str())));
-                m_AshitaCore->GetChatManager()->Write(0, false, Output::Messagef("WriteDelay set to $H%u$R.", mConfig.GetWritePeriod()).c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Info, "WriteDelay set to $H%u$R.", mConfig.GetWritePeriod());
             }
             return;
         }

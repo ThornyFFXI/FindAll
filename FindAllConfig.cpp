@@ -1,6 +1,5 @@
 #include "FindAllConfig.h"
 
-std::string Output::PluginName      = "FindAll";
 ConfigLoader* ConfigLoader::pLoader = nullptr;
 
 FindAllConfig::FindAllConfig()

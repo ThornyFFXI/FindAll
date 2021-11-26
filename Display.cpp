@@ -63,23 +63,23 @@ void FindAll::DisplayChatSingleCharacter(SearchInstance* pResult)
             int count = result.Count[x];
             if (count == 1)
             {
-                m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[x]).c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[x]);
                 printCount++;
             }
             else if (count > 1)
             {
-                m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $H%d %s$R in $H%s's %s$R.", count, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[x]).c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $H%d %s$R in $H%s's %s$R.", count, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[x]);
                 printCount++;
             }
         }
         if (result.StorageSlipContainer != -1)
         {
-            m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $Ha %s$R on a storage slip in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R on a storage slip in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]);
             printCount++;
         }
         if (printCount > 1)
         {
-            m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found a total of $H%u %s$R on $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Info, "Found a total of $H%u %s$R on $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name);
         }
     }
     else
@@ -92,11 +92,11 @@ void FindAll::DisplayChatSingleCharacter(SearchInstance* pResult)
             {
                 if (result.Total == 1)
                 {
-                    m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $Ha %s$R on a storage slip in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]).c_str());
+                    OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R on a storage slip in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]);
                 }
                 else
                 {
-                    m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found a total of $H%u %s$R on $H%s$R, including one on a storage slip in $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]).c_str());
+                    OutputHelper::Outputf(Ashita::LogLevel::Info, "Found a total of $H%u %s$R on $H%s$R, including one on a storage slip in $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]);
                 }
             }
             else
@@ -112,7 +112,7 @@ void FindAll::DisplayChatSingleCharacter(SearchInstance* pResult)
                             break;
                         }
                     }
-                    m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]).c_str());
+                    OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]);
                 }
                 else
                 {
@@ -135,17 +135,17 @@ void FindAll::DisplayChatSingleCharacter(SearchInstance* pResult)
 
                     if (container == -1)
                     {
-                        m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found a total of $H%u %s$R on $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name).c_str());
+                        OutputHelper::Outputf(Ashita::LogLevel::Info, "Found a total of $H%u %s$R on $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name);
                     }
                     else
                     {
-                        m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $H%u %s$R in $H%s's %s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[container]).c_str());
-                        m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]).c_str());
+                        OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $H%u %s$R in $H%s's %s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[container]);
+                        OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]);
                     }
                 }
             }
         }
-        m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found a total of $H%d matching items$R on $H%s$R.", pResult->GetItemTotal(), results[0].Character.Name).c_str());
+        OutputHelper::Outputf(Ashita::LogLevel::Info, "Found a total of $H%d matching items$R on $H%s$R.", pResult->GetItemTotal(), results[0].Character.Name);
     }
     delete pResult;
 }
@@ -172,11 +172,11 @@ void FindAll::DisplayChatMultipleCharacters(SearchInstance* pResult)
         {
             if (result.Total == 1)
             {
-                m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $Ha %s$R on a storage slip in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]).c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R on a storage slip in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]);
             }
             else
             {
-                m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found a total of $H%u %s$R on $H%s$R, including one on a storage slip in $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]).c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Info, "Found a total of $H%u %s$R on $H%s$R, including one on a storage slip in $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]);
             }
         }
         else
@@ -192,7 +192,7 @@ void FindAll::DisplayChatMultipleCharacters(SearchInstance* pResult)
                         break;
                     }
                 }
-                m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]).c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]);
             }
             else
             {
@@ -215,19 +215,19 @@ void FindAll::DisplayChatMultipleCharacters(SearchInstance* pResult)
 
                 if (container == -1)
                 {
-                    m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found a total of $H%u %s$R on $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name).c_str());
+                    OutputHelper::Outputf(Ashita::LogLevel::Info, "Found a total of $H%u %s$R on $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name);
                 }
                 else
                 {
-                    m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $H%u %s$R in $H%s's %s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[container]).c_str());
-                    m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]).c_str());
+                    OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $H%u %s$R in $H%s's %s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[container]);
+                    OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]);
                 }
             }
         }
     }
     if (pResult->GetCharacterCount() > 1)
     {
-        m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found a total of $H%u %s$R on %d characters.", pResult->GetItemTotal(), pItem->LogNamePlural[0], pResult->GetCharacterCount()).c_str());
+        OutputHelper::Outputf(Ashita::LogLevel::Info, "Found a total of $H%u %s$R on %d characters.", pResult->GetItemTotal(), pItem->LogNamePlural[0], pResult->GetCharacterCount());
     }
     delete pResult;
 }
@@ -255,11 +255,11 @@ void FindAll::DisplayChatMultipleCharactersItems(SearchInstance* pResult)
         {
             if (result.Total == 1)
             {
-                m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $Ha %s$R on a storage slip in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]).c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R on a storage slip in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]);
             }
             else
             {
-                m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found a total of $H%u %s$R on $H%s$R, including one on a storage slip in $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]).c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Info, "Found a total of $H%u %s$R on $H%s$R, including one on a storage slip in $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[result.StorageSlipContainer]);
             }
         }
         else
@@ -275,7 +275,7 @@ void FindAll::DisplayChatMultipleCharactersItems(SearchInstance* pResult)
                         break;
                     }
                 }
-                m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]).c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]);
             }
             else
             {
@@ -298,12 +298,12 @@ void FindAll::DisplayChatMultipleCharactersItems(SearchInstance* pResult)
 
                 if (container == -1)
                 {
-                    m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found a total of $H%u %s$R on $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name).c_str());
+                    OutputHelper::Outputf(Ashita::LogLevel::Info, "Found a total of $H%u %s$R on $H%s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name);
                 }
                 else
                 {
-                    m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $H%u %s$R in $H%s's %s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[container]).c_str());
-                    m_AshitaCore->GetChatManager()->Writef(0, false, Output::Messagef("Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]).c_str());
+                    OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $H%u %s$R in $H%s's %s$R.", result.Total, pItem->LogNamePlural[0], result.Character.Name, ContainerNames[container]);
+                    OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]);
                 }
             }
         }

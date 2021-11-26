@@ -39,7 +39,7 @@ public:
     }
     bool GetIsCharacterFile()
     {
-        int length       = strlen(mLoadedFilePath);
+        int length = strlen(mLoadedFilePath);
         return ((strcmp(mLoadedFilePath + (length - 12), "\\default.xml") != 0) && (strcmp(mLoadedFilePath, "N/A") != 0));
     }
     const char* GetPluginName()
@@ -56,10 +56,10 @@ public:
         strcpy_s(mPluginName, 256, pluginName);
     }
 
-    virtual ConfigSaveStyle GetDefaultSaveStyle()                               = 0;
-    virtual void Reset()                                                        = 0;
-    virtual bool LoadConfig(xml_node<>* pRoot, const char* errorBuffer) = 0;
-    virtual bool SaveConfig(std::ofstream* pStream, const char* errorBuffer)    = 0;
+    virtual ConfigSaveStyle GetDefaultSaveStyle()                            = 0;
+    virtual void Reset()                                                     = 0;
+    virtual bool LoadConfig(xml_node<>* pRoot, const char* errorBuffer)      = 0;
+    virtual bool SaveConfig(std::ofstream* pStream, const char* errorBuffer) = 0;
 };
 
 class ConfigLoader
@@ -79,8 +79,8 @@ public:
         : pAshitaCore(pAshitaCore)
         , pConfig(pConfig)
     {
-        mCharacterId     = 0;
-        uint16_t myIndex = pAshitaCore->GetMemoryManager()->GetParty()->GetMemberTargetIndex(0);
+        mCharacterId       = 0;
+        uint16_t myIndex   = pAshitaCore->GetMemoryManager()->GetParty()->GetMemberTargetIndex(0);
         const char* myName = pAshitaCore->GetMemoryManager()->GetEntity()->GetName(myIndex);
         if ((myIndex > 0) && (myName) && (strlen(myName) > 2))
         {
@@ -109,7 +109,7 @@ public:
         if ((strcmp(nameBuffer, mCharacterName) != 0) || (mCharacterId != id))
         {
             strcpy_s(mCharacterName, 32, nameBuffer);
-            mCharacterId = id;            
+            mCharacterId = id;
             if ((strlen(mCharacterName) < 3) || (mCharacterId == 0))
             {
                 memset(mCharacterName, 0, 32);
@@ -137,7 +137,7 @@ public:
                 return;
             }
         }
-        
+
         //If a default config doesn't exist, write it.
         else
         {
@@ -187,7 +187,7 @@ private:
             string currentDirectory = makeDirectory.substr(0, nextDirectory + 1);
             if ((!CreateDirectory(currentDirectory.c_str(), NULL)) && (ERROR_ALREADY_EXISTS != GetLastError()))
             {
-                pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Could not find or create folder: $H%s$R", currentDirectory.c_str()).c_str());
+                OutputHelper::Outputf(Ashita::LogLevel::Error, "Could not find or create folder: $H%s$R", currentDirectory.c_str());
                 return;
             }
             nextDirectory = makeDirectory.find("\\", nextDirectory + 1);
@@ -202,18 +202,18 @@ private:
         pConfig->Reset();
         if (!silent)
         {
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Message("Default settings restored.").c_str());
+            OutputHelper::Output(Ashita::LogLevel::Info, "Default settings restored.");
         }
     }
     bool LoadFile()
     {
-        char path[256];        
+        char path[256];
         strcpy_s(path, 256, pConfig->GetFilePath());
         Reset(true);
         std::ifstream inputStream = ifstream(path, ios::in | ios::binary | ios::ate);
         if (!inputStream.is_open())
         {
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Failed to read file: $H%s$R", path).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Failed to read file: $H%s$R", path);
             return false;
         }
         pConfig->SetFilePath(path);
@@ -234,7 +234,7 @@ private:
             if (buffer != nullptr)
                 delete[] buffer;
 
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Exception while reading $H%s$R: %s$H%s$R", path, e.what()).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Exception while reading $H%s$R: %s$H%s$R", path, e.what());
             return false;
         }
         catch (...)
@@ -242,7 +242,7 @@ private:
             if (buffer != nullptr)
                 delete[] buffer;
 
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Unknown exception while reading file: $H%s$R", path).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Unknown exception while reading file: $H%s$R", path);
             return false;
         }
 
@@ -254,15 +254,15 @@ private:
         catch (const rapidxml::parse_error& e)
         {
             int line = static_cast<long>(std::count(buffer, e.where<char>(), '\n') + 1);
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Parse error while evaluating $H%s$R on line $H%d$R.", path, line).c_str());
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Error message: %H%s$R", e.what()).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Parse error while evaluating $H%s$R on line $H%d$R.", path, line);
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Error message: %H%s$R", e.what());
             delete pDocument;
             delete[] buffer;
             return false;
         }
         catch (...)
         {
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Parse error while evaluating $H%s$R.  No message specified.", path).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Parse error while evaluating $H%s$R.  No message specified.", path);
             delete pDocument;
             delete[] buffer;
             return false;
@@ -271,7 +271,7 @@ private:
         xml_node<>* pRoot = pDocument->first_node();
         if (_stricmp(pRoot->name(), pConfig->GetPluginName()))
         {
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Parse error while evaluating $H%s$R.  Root node did not match plugin name.", path).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Parse error while evaluating $H%s$R.  Root node did not match plugin name.", path);
             delete pDocument;
             delete[] buffer;
             return false;
@@ -292,7 +292,7 @@ private:
         }
 
         if (!pConfig->GetIsCharacterFile())
-        { 
+        {
             pNode = pRoot->first_node("characterspecificsettings");
             if (pNode)
             {
@@ -306,7 +306,7 @@ private:
                 }
             }
         }
-        
+
         //Let plugin config class handle load/save
         char errorBuffer[256];
         bool result = pConfig->LoadConfig(pRoot, errorBuffer);
@@ -314,8 +314,8 @@ private:
         delete[] buffer;
         if (!result)
         {
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Plugin failed to load settings file: $H%s$R", path).c_str());
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Error: %s", errorBuffer).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Plugin failed to load settings file: $H%s$R", path);
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Error: %s", errorBuffer);
             return false;
         }
         return true;
@@ -324,12 +324,12 @@ private:
     bool WriteFile()
     {
         //Attempt to create a stream.
-        const char* path = pConfig->GetFilePath();
+        const char* path           = pConfig->GetFilePath();
         bool exists                = std::filesystem::exists(path);
         std::ofstream outputStream = ofstream(path);
         if (!outputStream.is_open())
         {
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Failed to write file: $H%s$R", path).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Failed to write file: $H%s$R", path);
             return false;
         }
 
@@ -357,8 +357,8 @@ private:
         bool result = pConfig->SaveConfig(&outputStream, errorBuffer);
         if (!result)
         {
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Plugin failed to save settings file: $H%s$R", path).c_str());
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Errorf("Error: %s", errorBuffer).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Plugin failed to save settings file: $H%s$R", path);
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Error: %s", errorBuffer);
             outputStream.close();
             return false;
         }
@@ -366,7 +366,7 @@ private:
         outputStream.close();
         if (!exists)
         {
-            pAshitaCore->GetChatManager()->Write(0, false, Output::Messagef("Wrote new settings file: $H%s$R", path).c_str());
+            OutputHelper::Outputf(Ashita::LogLevel::Info, "Wrote new settings file: $H%s$R", path);
         }
 
         return true;
