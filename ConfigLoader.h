@@ -216,7 +216,6 @@ private:
             OutputHelper::Outputf(Ashita::LogLevel::Error, "Failed to read file: $H%s$R", path);
             return false;
         }
-        pConfig->SetFilePath(path);
 
         long size    = inputStream.tellg();
         char* buffer = nullptr;
@@ -318,6 +317,7 @@ private:
             OutputHelper::Outputf(Ashita::LogLevel::Error, "Error: %s", errorBuffer);
             return false;
         }
+        pConfig->SetFilePath(path);
         return true;
     }
 

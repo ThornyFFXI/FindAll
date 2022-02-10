@@ -4,7 +4,7 @@
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
 #endif
-
+#define CONTAINER_MAX 17
 #include "ConfigLoader.h"
 
 enum class FindAllDisplayMode

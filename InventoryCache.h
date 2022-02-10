@@ -78,10 +78,10 @@ private:
     bool mSwappable;
     bool mWritesPending;
     std::chrono::steady_clock::time_point mWriteTime;
-    Ashita::FFXI::items_t mContainers[13];
+    Ashita::FFXI::items_t mContainers[CONTAINER_MAX];
 
     SwapStatus mSwapStatus;
-    Ashita::FFXI::items_t mSwap[13];
+    Ashita::FFXI::items_t mSwap[CONTAINER_MAX];
 
 public:
     InventoryCache(IAshitaCore* pAshitaCore, FindAllConfig* pConfig);
@@ -101,7 +101,7 @@ class QueriableCache
 {
 private:
     CharacterIdentifier_t mCharacter;
-    Ashita::FFXI::items_t mContainers[13];
+    Ashita::FFXI::items_t mContainers[CONTAINER_MAX];
     bool mLoaded;
     
 public:

@@ -207,7 +207,7 @@ void InventoryCache::HandleTick()
 
 void InventoryCache::ClearCache(Ashita::FFXI::items_t* cache)
 {
-    for (int container = 0; container < 13; container++)
+    for (int container = 0; container < CONTAINER_MAX; container++)
     {
         for (int index = 0; index < 81; index++)
         {
@@ -219,7 +219,7 @@ void InventoryCache::ClearCache(Ashita::FFXI::items_t* cache)
 void InventoryCache::FlushCacheToMemory()
 {
     Ashita::FFXI::items_t* pInventory = pAshitaCore->GetMemoryManager()->GetInventory()->GetRawStructure()->Containers;
-    for (int x = 0; x < 13; x++)
+    for (int x = 0; x < CONTAINER_MAX; x++)
     {
         if (x != (int)Ashita::FFXI::Enums::Container::Temporary)
         {
@@ -260,7 +260,7 @@ bool InventoryCache::TryWriteFile()
     {
         writer.write(mCharacter.Name, 16);
         writer.write((char*)&mCharacter.Id, 4);
-        for (int x = 0; x < 13; x++)
+        for (int x = 0; x < CONTAINER_MAX; x++)
         {
             if (x == (int)Ashita::FFXI::Enums::Container::Temporary)
                 continue;
@@ -284,7 +284,7 @@ QueriableCache::QueriableCache(InventoryCache* pCache)
 {
     strcpy_s(mCharacter.Name, 16, ConfigLoader::pLoader->GetCharacterName());
     mCharacter.Id = ConfigLoader::pLoader->GetCharacterId();
-    for (int container = 0; container < 13; container++)
+    for (int container = 0; container < CONTAINER_MAX; container++)
     {
         for (int index = 0; index < 81; index++)
         {
@@ -367,25 +367,36 @@ void QueriableCache::LoadAll(IAshitaCore* pAshitaCore, std::vector<QueriableCach
 }
 bool QueriableCache::TryLoadFile(const char* fileName)
 {
+    int container = 0;
+    int index     = 0;
     std::ifstream reader(fileName, std::ios::in | std::ios::binary);
     if (!reader.is_open())
         return false;
+    Ashita::FFXI::item_t blank = {0};
     try
     {
         reader.read(mCharacter.Name, 16);
         reader.read((char*)&mCharacter.Id, 4);
-        for (int x = 0; x < 13; x++)
+        for (container = 0; container < CONTAINER_MAX; container++)
         {
-            if (x == (int)Ashita::FFXI::Enums::Container::Temporary)
+            if (container == (int)Ashita::FFXI::Enums::Container::Temporary)
                 continue;
 
-            for (int y = 0; y < 81; y++)
+            for (index = 0; index < 81; index++)
             {
-                reader.read((char*)&mContainers[x].Items[y], sizeof(Ashita::FFXI::item_t));
-                if (mContainers[x].Items[y].Index != y)
+                if (reader.peek() == EOF)
                 {
-                    reader.close();
-                    return false;
+                    blank.Index = index;
+                    memcpy((char*)&mContainers[container].Items[index], &blank, sizeof(Ashita::FFXI::item_t));
+                }
+                else
+                {
+                    reader.read((char*)&mContainers[container].Items[index], sizeof(Ashita::FFXI::item_t));
+                    if (mContainers[container].Items[index].Index != index)
+                    {
+                        reader.close();
+                        return false;
+                    }
                 }
             }
         }

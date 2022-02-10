@@ -5,7 +5,8 @@
 #include <string>
 #include <string_view>
 
-const char* ContainerNames[13] =
+#define CONTAINER_MAX 17
+const char* ContainerNames[CONTAINER_MAX] =
     {
         "inventory",
         "safe",
@@ -19,7 +20,11 @@ const char* ContainerNames[13] =
         "safe2",
         "wardrobe2",
         "wardrobe3",
-        "wardrobe4"};
+        "wardrobe4",
+        "wardrobe5",
+        "wardrobe6",
+        "wardrobe7",
+        "wardrobe8"};
 
 #define COLOR_MAX 6
 std::string ColorCodes[COLOR_MAX] = {
@@ -58,7 +63,7 @@ void FindAll::DisplayChatSingleCharacter(SearchInstance* pResult)
         SearchResult_t result = results[0];
         IItem* pItem          = m_AshitaCore->GetResourceManager()->GetItemById(result.Id);
         int printCount        = 0;
-        for (int x = 0; x < 13; x++)
+        for (int x = 0; x < CONTAINER_MAX; x++)
         {
             int count = result.Count[x];
             if (count == 1)
@@ -104,7 +109,7 @@ void FindAll::DisplayChatSingleCharacter(SearchInstance* pResult)
                 if (result.Total == 1)
                 {
                     int container = -1;
-                    for (int y = 0; y < 13; y++)
+                    for (int y = 0; y < CONTAINER_MAX; y++)
                     {
                         if (result.Count[y] > 0)
                         {
@@ -117,7 +122,7 @@ void FindAll::DisplayChatSingleCharacter(SearchInstance* pResult)
                 else
                 {
                     int container = -1;
-                    for (int y = 0; y < 13; y++)
+                    for (int y = 0; y < CONTAINER_MAX; y++)
                     {
                         if (result.Count[y] > 0)
                         {
@@ -184,7 +189,7 @@ void FindAll::DisplayChatMultipleCharacters(SearchInstance* pResult)
             if (result.Total == 1)
             {
                 int container = -1;
-                for (int y = 0; y < 13; y++)
+                for (int y = 0; y < CONTAINER_MAX; y++)
                 {
                     if (result.Count[y] > 0)
                     {
@@ -197,7 +202,7 @@ void FindAll::DisplayChatMultipleCharacters(SearchInstance* pResult)
             else
             {
                 int container = -1;
-                for (int y = 0; y < 13; y++)
+                for (int y = 0; y < CONTAINER_MAX; y++)
                 {
                     if (result.Count[y] > 0)
                     {
@@ -267,7 +272,7 @@ void FindAll::DisplayChatMultipleCharactersItems(SearchInstance* pResult)
             if (result.Total == 1)
             {
                 int container = -1;
-                for (int y = 0; y < 13; y++)
+                for (int y = 0; y < CONTAINER_MAX; y++)
                 {
                     if (result.Count[y] > 0)
                     {
@@ -280,7 +285,7 @@ void FindAll::DisplayChatMultipleCharactersItems(SearchInstance* pResult)
             else
             {
                 int container = -1;
-                for (int y = 0; y < 13; y++)
+                for (int y = 0; y < CONTAINER_MAX; y++)
                 {
                     if (result.Count[y] > 0)
                     {

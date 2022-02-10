@@ -8,11 +8,6 @@ FindAllConfig::FindAllConfig()
 {
 }
 
-ConfigSaveStyle FindAllConfig::GetDefaultSaveStyle()
-{
-    return ConfigSaveStyle::CharacterSpecific;
-}
-
 bool FindAllConfig::GetCacheToDisc()
 {
     return mSettings.CacheToDisc;
@@ -75,6 +70,11 @@ void FindAllConfig::SetWritePeriod(uint32_t milliseconds)
         mSettings.WritePeriod = newPeriod;
         ConfigLoader::pLoader->SaveSettings();
     }
+}
+
+ConfigSaveStyle FindAllConfig::GetDefaultSaveStyle()
+{
+    return ConfigSaveStyle::CharacterSpecific;
 }
 
 bool FindAllConfig::LoadConfig(xml_node<>* pRoot, const char* errorBuffer)

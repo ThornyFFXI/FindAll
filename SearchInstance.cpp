@@ -1,5 +1,6 @@
 #include "SearchInstance.h"
-const char* gContainerNames[13] =
+#define CONTAINER_MAX 17
+const char* gContainerNames[CONTAINER_MAX] =
     {
         "Inventory",
         "Safe",
@@ -13,7 +14,11 @@ const char* gContainerNames[13] =
         "Safe2",
         "Wardrobe2",
         "Wardrobe3",
-        "Wardrobe4"};
+        "Wardrobe4",
+        "Wardrobe5",
+        "Wardrobe6",
+        "Wardrobe7",
+        "Wardrobe8"};
 
 SearchInstance::SearchInstance(std::vector<SearchResult_t> results, const char* query, int maxResults)
     : mCharacterCount(0)
@@ -62,7 +67,7 @@ SearchInstance::SearchInstance(std::vector<SearchResult_t> results, const char* 
                 mDuplicatePlayerName = true;
             }
         }
-        for (int x = 0; x < 13; x++)
+        for (int x = 0; x < CONTAINER_MAX; x++)
         {
             if ((resultIter->Count[x] > 0) || (resultIter->StorageSlipContainer == x))
             {

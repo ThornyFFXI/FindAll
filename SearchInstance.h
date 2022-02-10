@@ -27,7 +27,7 @@ struct SearchResult_t
     uint16_t Id;
     IItem* Resource;
     uint32_t Total;
-    uint32_t Count[13];
+    uint32_t Count[CONTAINER_MAX];
     int16_t StorageSlipContainer;
 };
 struct ItemStub_t

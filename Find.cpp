@@ -170,7 +170,7 @@ std::vector<SearchResult_t> FindAll::QueryCache(std::vector<SearchItem_t> itemId
         result.Resource             = m_AshitaCore->GetResourceManager()->GetItemById(result.Id);
         result.StorageSlipContainer = -1;
         result.Total                = 0;
-        for (int container = 0; container < 13; container++)
+        for (int container = 0; container < CONTAINER_MAX; container++)
         {
             result.Count[container]      = 0;
             for (int index = 0; index < 81; index++)
