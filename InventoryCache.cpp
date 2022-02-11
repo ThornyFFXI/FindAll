@@ -84,7 +84,7 @@ void InventoryCache::HandleIncomingPacket(uint16_t id, uint32_t size, const uint
         }
         ClearCache(mSwap);
     }
-    if (id == 0x01D)
+    if ((id == 0x01D) && (*(data + 4) == 1))
     {
         if (mCharacter.Id != 0)
         {
