@@ -6,6 +6,10 @@ uint32_t FindAll::ThreadEntry()
     if (items.size() == 0)
     {
         OutputHelper::Outputf(Ashita::LogLevel::Error, "Could not find any item IDs matching the term: $H%s$R.", mPending.Term);
+        for (std::vector<QueriableCache*>::iterator iCache = mPending.Caches.begin(); iCache != mPending.Caches.end(); iCache = mPending.Caches.erase(iCache))
+        {
+            delete *iCache;
+        }
         InterlockedExchange(&mPending.State, (uint32_t)SearchState::Idle);
         return 0;
     }
@@ -75,7 +79,7 @@ SearchItem_t FindAll::CreateSearchItem(uint16_t id)
 }
 void FindAll::FindAcrossCharacters(const char* term)
 {
-    if (InterlockedCompareExchange(&mPending.State, (uint32_t)SearchState::InProgress, (uint32_t)SearchState::Idle) != (uint32_t)(uint32_t)SearchState::Idle)
+    if (InterlockedCompareExchange(&mPending.State, (uint32_t)SearchState::InProgress, (uint32_t)SearchState::Idle) != (uint32_t)SearchState::Idle)
     {
         OutputHelper::Outputf(Ashita::LogLevel::Error, "Currently processing a search: $H%s$R.", mPending.Term);
         return;
