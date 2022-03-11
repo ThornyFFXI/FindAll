@@ -61,7 +61,7 @@ SearchItem_t FindAll::CreateSearchItem(uint16_t id)
     item.SlipOffset = 0;
     for (std::vector<StorageSlip_t>::iterator iSlip = mSlips.begin(); iSlip != mSlips.end(); iSlip++)
     {
-        for (int offset = 0; offset < 228; offset++)
+        for (int offset = 0; offset < 192; offset++)
         {
             if (iSlip->StoredItem[offset] == id)
             {

@@ -117,7 +117,10 @@ void FindAll::DisplayChatSingleCharacter(SearchInstance* pResult)
                             break;
                         }
                     }
-                    OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]);
+                    if (container != -1)
+                    {
+                        OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]);
+                    }
                 }
                 else
                 {
@@ -197,7 +200,10 @@ void FindAll::DisplayChatMultipleCharacters(SearchInstance* pResult)
                         break;
                     }
                 }
-                OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]);
+                if (container != -1)
+                {
+                    OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]);
+                }
             }
             else
             {
@@ -280,7 +286,10 @@ void FindAll::DisplayChatMultipleCharactersItems(SearchInstance* pResult)
                         break;
                     }
                 }
-                OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]);
+                if (container != -1)
+                {
+                    OutputHelper::Outputf(Ashita::LogLevel::Info, "Found $Ha %s$R in $H%s's %s$R.", pItem->LogNameSingular[0], result.Character.Name, ContainerNames[container]);
+                }
             }
             else
             {

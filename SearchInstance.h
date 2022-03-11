@@ -18,7 +18,7 @@ struct SearchItem_t
 struct StorageSlip_t
 {
     uint16_t ItemId;
-    uint16_t StoredItem[224];
+    uint16_t StoredItem[192];
 };
 
 struct SearchResult_t

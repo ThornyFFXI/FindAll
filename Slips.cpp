@@ -78,8 +78,9 @@ void FindAll::LoadSlipData()
                     xml_attribute<>* pId     = pSubNode->first_attribute("id");
                     if ((pOffset) && (pId))
                     {
-                        slip.StoredItem[atoi(pOffset->value())] = static_cast<uint16_t>(atoi(pId->value()));
-                    }                    
+                        uint16_t offset         = static_cast<uint16_t>(atoi(pOffset->value()));
+                        slip.StoredItem[offset] = static_cast<uint16_t>(atoi(pId->value()));
+                    }
                 }
 
                 mSlips.push_back(slip);
