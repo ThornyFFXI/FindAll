@@ -22,7 +22,7 @@ struct PendingSearch_t
     std::vector<QueriableCache*> Caches;
     std::vector<SearchResult_t> Results;
     SearchInstance* pSearch;
-    char Term[256];
+    std::vector<std::string> Terms;
     volatile uint32_t State;
 };
 
@@ -61,7 +61,7 @@ public:
     }
     double GetVersion(void) const override
     {
-        return 1.06f;
+        return 1.07f;
     }
     int32_t GetPriority(void) const override
     {
@@ -87,7 +87,7 @@ private:
     uint32_t ThreadEntry(void) override;
     bool CheckWildcardMatch(const char* wc, const char* compare);
     SearchItem_t CreateSearchItem(uint16_t id);
-    void FindAcrossCharacters(const char* term);
+    void FindAcrossCharacters(std::vector<std::string> terms);
     std::vector<SearchItem_t> GetMatchingItems(const char* term);
     std::vector<SearchResult_t> QueryCache(std::vector<SearchItem_t> itemIds, QueriableCache* pCache);
 

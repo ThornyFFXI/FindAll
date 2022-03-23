@@ -2,10 +2,19 @@
 
 uint32_t FindAll::ThreadEntry()
 {
-    std::vector<SearchItem_t> items = GetMatchingItems(mPending.Term);
+    std::vector<SearchItem_t> items;
+    for (auto iter = mPending.Terms.begin(); iter != mPending.Terms.end(); iter++)
+    {
+        auto vector = GetMatchingItems(iter->c_str());
+        items.insert(items.end(), vector.begin(), vector.end());
+    }
     if (items.size() == 0)
     {
-        OutputHelper::Outputf(Ashita::LogLevel::Error, "Could not find any item IDs matching the term: $H%s$R.", mPending.Term);
+        if (mPending.Terms.size() == 1)
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Could not find any item IDs matching the term: $H%s$R.", mPending.Terms[0].c_str());
+        else
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Could not find any item IDs matching any of $H%d$R search terms.", mPending.Terms.size());
+
         for (std::vector<QueriableCache*>::iterator iCache = mPending.Caches.begin(); iCache != mPending.Caches.end(); iCache = mPending.Caches.erase(iCache))
         {
             delete *iCache;
@@ -22,7 +31,7 @@ uint32_t FindAll::ThreadEntry()
 
     if (mPending.Results.size() > 0)
     {
-        mPending.pSearch = new SearchInstance(mPending.Results, mPending.Term, mConfig.GetDisplayMax());
+        mPending.pSearch = new SearchInstance(mPending.Results, mPending.Terms, mConfig.GetDisplayMax());
     }
     else
     {
@@ -77,14 +86,17 @@ SearchItem_t FindAll::CreateSearchItem(uint16_t id)
     }
     return item;
 }
-void FindAll::FindAcrossCharacters(const char* term)
+void FindAll::FindAcrossCharacters(std::vector<std::string> terms)
 {
     if (InterlockedCompareExchange(&mPending.State, (uint32_t)SearchState::InProgress, (uint32_t)SearchState::Idle) != (uint32_t)SearchState::Idle)
     {
-        OutputHelper::Outputf(Ashita::LogLevel::Error, "Currently processing a search: $H%s$R.", mPending.Term);
+        if (mPending.Terms.size() == 1)
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Currently processing a search: $H%s$R.", mPending.Terms[0].c_str());
+        else
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Currently processing a search: $H%d terms$R.", mPending.Terms.size());
         return;
     }
-    strcpy_s(mPending.Term, 256, term);
+    mPending.Terms = terms;
     mPending.Results.clear();
     mPending.Caches.push_back(new QueriableCache(this->pCache));
     QueriableCache::LoadAll(m_AshitaCore, &mPending.Caches);

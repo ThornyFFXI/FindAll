@@ -333,9 +333,11 @@ void FindAll::DisplayChatMultipleCharactersItems(SearchInstance* pResult)
 }
 void FindAll::DisplayFontObject(SearchInstance* pResult)
 {
+    auto query = pResult->GetQuery();
+    auto size  = query.size();
     for (std::list<SearchInstance*>::iterator searchIter = mSearches.begin(); searchIter != mSearches.end(); searchIter++)
     {
-        if (_stricmp(pResult->GetQuery(), (*searchIter)->GetQuery()) == 0)
+        if ((*searchIter)->GetQuery() == query)
         {
             delete *searchIter;
             *searchIter = pResult;

@@ -16,7 +16,12 @@ void FindAll::ImguiDisplay()
             int rowCount            = pTable->GetRowCount();
             int columnCount         = pTable->GetColumnCount();
 
-            sprintf_s(objectName, 256, "Query: %s", pSearch->GetQuery());
+            auto query = pSearch->GetQuery();
+            auto size  = query.size();
+            if (size == 1)
+                sprintf_s(objectName, 256, "Query: %s", query[0].c_str());
+            else
+                sprintf_s(objectName, 256, "Query: %s[%d]", query[0].c_str(), size);
             if (imgui->BeginTabItem(objectName, 0, ImGuiTabItemFlags_NoCloseWithMiddleMouseButton))
             {
                 if ((imgui->IsItemHovered()) && (imgui->IsMouseDoubleClicked(0)))
@@ -26,7 +31,10 @@ void FindAll::ImguiDisplay()
                     continue;
                 }
 
-                sprintf_s(objectName, 256, "FindAllTable_%s", pSearch->GetQuery());
+                if (size == 1)
+                    sprintf_s(objectName, 256, "FindAllTable_%s", query[0].c_str());
+                else
+                    sprintf_s(objectName, 256, "FindAllTable_%s[%d]", query[0].c_str(), size);
                 if (imgui->BeginTable(objectName, columnCount, ImGuiTableFlags_SizingStretchSame))
                 {
                     for (int x = 0; x < columnCount; x++)

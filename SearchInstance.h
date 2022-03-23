@@ -168,10 +168,10 @@ private:
 
     bool mDuplicateItemName;
     bool mDuplicatePlayerName;
-    char mQuery[256];
+    std::vector<std::string> mSearchTerms;
 
 public:
-    SearchInstance(std::vector<SearchResult_t> results, const char* query, int maxResults);
+    SearchInstance(std::vector<SearchResult_t> results, std::vector<std::string> searchTerms, int maxResults);
     ~SearchInstance();
 
     void SetSearchMode(SearchDisplayMode mode);
@@ -180,7 +180,7 @@ public:
     int GetItemCount();
     int GetContainerCount();
     int GetItemTotal();
-    const char* GetQuery();
+    std::vector<std::string> GetQuery();
     std::vector<SearchResult_t> GetResultVector();
     SearchTable* GetResultTable();
 };

@@ -102,7 +102,12 @@ void FindAll::HandleCommandInternal(std::vector<std::string> args, int argCount)
     {
         if (argCount > 2)
         {
-            FindAcrossCharacters(args[2].c_str());
+            std::vector<std::string> terms;
+            for (int x = 2; x < argCount; x++)
+            {
+                terms.push_back(std::string(args[x]));
+            }
+            FindAcrossCharacters(terms);
         }
     }
 

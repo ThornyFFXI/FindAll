@@ -20,7 +20,7 @@ const char* gContainerNames[CONTAINER_MAX] =
         "Wardrobe7",
         "Wardrobe8"};
 
-SearchInstance::SearchInstance(std::vector<SearchResult_t> results, const char* query, int maxResults)
+SearchInstance::SearchInstance(std::vector<SearchResult_t> results, std::vector<std::string> searchTerms, int maxResults)
     : mCharacterCount(0)
     , mContainerCount(0)
     , mDuplicateItemName(false)
@@ -28,11 +28,10 @@ SearchInstance::SearchInstance(std::vector<SearchResult_t> results, const char* 
     , mItemTotal(0)
     , mItemCount(0)
     , mResultVector(results)
+    , mSearchTerms(searchTerms)
     , mSearchMode(SearchDisplayMode::Unsorted)
     , pSearchTable(nullptr)
 {
-    strcpy_s(mQuery, 256, query);
-
     //used to trim the most common items
     std::vector<ItemStub_t> itemStubs;
     //used to identify duplicate character names
@@ -362,9 +361,9 @@ int SearchInstance::GetContainerCount()
 {
     return mContainerCount;
 }
-const char* SearchInstance::GetQuery()
+std::vector<std::string> SearchInstance::GetQuery()
 {
-    return mQuery;
+    return mSearchTerms;
 }
 
 std::vector<SearchResult_t> SearchInstance::GetResultVector()

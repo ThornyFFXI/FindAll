@@ -78,7 +78,10 @@ void FindAll::Direct3DPresent(const RECT* pSourceRect, const RECT* pDestRect, HW
     {
         if (mPending.pSearch == nullptr)
         {
-            OutputHelper::Outputf(Ashita::LogLevel::Error, "Could not find any items matching the term: $H%s$R.", mPending.Term);
+            if (mPending.Terms.size() == 1)
+                OutputHelper::Outputf(Ashita::LogLevel::Error, "Could not find any items matching the term: $H%s$R.", mPending.Terms[0].c_str());
+            else
+                OutputHelper::Outputf(Ashita::LogLevel::Error, "Could not find any items matching any of %d search terms.", mPending.Terms.size());
         }
         else
         {
