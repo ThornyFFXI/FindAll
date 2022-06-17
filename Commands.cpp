@@ -89,7 +89,7 @@ void FindAll::HandleCommandInternal(std::vector<std::string> args, int argCount)
         }
     }
 
-    if ARG(1, "clear")
+    else if ARG(1, "clear")
     {
         for (std::list<SearchInstance*>::iterator searchIter = mSearches.begin(); searchIter != mSearches.end(); searchIter = mSearches.erase(searchIter))
         {
@@ -98,7 +98,7 @@ void FindAll::HandleCommandInternal(std::vector<std::string> args, int argCount)
         return;
     }
 
-    if ARG (1, "search")
+    else if ARG(1, "search")
     {
         if (argCount > 2)
         {
@@ -111,4 +111,13 @@ void FindAll::HandleCommandInternal(std::vector<std::string> args, int argCount)
         }
     }
 
+    else if (argCount > 1)
+    {
+        std::vector<std::string> terms;
+        for (int x = 1; x < argCount; x++)
+        {
+            terms.push_back(std::string(args[x]));
+        }
+        FindAcrossCharacters(terms);
+    }
 }
