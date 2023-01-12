@@ -111,6 +111,19 @@ void FindAll::HandleCommandInternal(std::vector<std::string> args, int argCount)
         }
     }
 
+    else if ARG (1, "local")
+    {
+        if (argCount > 2)
+        {
+            std::vector<std::string> terms;
+            for (int x = 2; x < argCount; x++)
+            {
+                terms.push_back(std::string(args[x]));
+            }
+            FindLocal(terms);
+        }
+    }
+
     else if (argCount > 1)
     {
         std::vector<std::string> terms;

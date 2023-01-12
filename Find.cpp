@@ -103,6 +103,22 @@ void FindAll::FindAcrossCharacters(std::vector<std::string> terms)
 
     this->Start();
 }
+void FindAll::FindLocal(std::vector<std::string> terms)
+{
+    if (InterlockedCompareExchange(&mPending.State, (uint32_t)SearchState::InProgress, (uint32_t)SearchState::Idle) != (uint32_t)SearchState::Idle)
+    {
+        if (mPending.Terms.size() == 1)
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Currently processing a search: $H%s$R.", mPending.Terms[0].c_str());
+        else
+            OutputHelper::Outputf(Ashita::LogLevel::Error, "Currently processing a search: $H%d terms$R.", mPending.Terms.size());
+        return;
+    }
+    mPending.Terms = terms;
+    mPending.Results.clear();
+    mPending.Caches.push_back(new QueriableCache(this->pCache));
+
+    this->Start();
+}
 std::vector<SearchItem_t> FindAll::GetMatchingItems(const char* term)
 {
     std::vector<SearchItem_t> matchIds;
@@ -150,9 +166,16 @@ std::vector<SearchItem_t> FindAll::GetMatchingItems(const char* term)
         for (int x = 0; x < 65536; x++)
         {
             IItem* pResource = m_AshitaCore->GetResourceManager()->GetItemById(x);
-            if ((pResource) && (pResource->Name[0]) && (_stricmp(term, pResource->Name[0]) == 0))
+            if (pResource)
             {
-                matchIds.push_back(CreateSearchItem(x));
+                if ((pResource->Name[0]) && (_stricmp(term, pResource->Name[0]) == 0))
+                {
+                    matchIds.push_back(CreateSearchItem(x));
+                }
+                if ((pResource->LogNameSingular[0]) && (_stricmp(term, pResource->LogNameSingular[0]) == 0))
+                {
+                    matchIds.push_back(CreateSearchItem(x));
+                }
             }
         }
 
@@ -165,9 +188,16 @@ std::vector<SearchItem_t> FindAll::GetMatchingItems(const char* term)
             for (int x = 0; x < 65536; x++)
             {
                 IItem* pResource = m_AshitaCore->GetResourceManager()->GetItemById(x);
-                if ((pResource) && (pResource->Name[0]) && (CheckWildcardMatch(wcBuffer, pResource->Name[0])))
+                if (pResource)
                 {
-                    matchIds.push_back(CreateSearchItem(x));
+                    if ((pResource->Name[0]) && (CheckWildcardMatch(wcBuffer, pResource->Name[0])))
+                    {
+                        matchIds.push_back(CreateSearchItem(x));
+                    }
+                    if ((pResource->LogNameSingular[0]) && (CheckWildcardMatch(wcBuffer, pResource->LogNameSingular[0])))
+                    {
+                        matchIds.push_back(CreateSearchItem(x));
+                    }
                 }
             }
         }
