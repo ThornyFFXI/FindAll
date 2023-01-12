@@ -172,7 +172,7 @@ std::vector<SearchItem_t> FindAll::GetMatchingItems(const char* term)
                 {
                     matchIds.push_back(CreateSearchItem(x));
                 }
-                if ((pResource->LogNameSingular[0]) && (_stricmp(term, pResource->LogNameSingular[0]) == 0))
+                else if ((pResource->LogNameSingular[0]) && (_stricmp(term, pResource->LogNameSingular[0]) == 0))
                 {
                     matchIds.push_back(CreateSearchItem(x));
                 }
@@ -194,7 +194,7 @@ std::vector<SearchItem_t> FindAll::GetMatchingItems(const char* term)
                     {
                         matchIds.push_back(CreateSearchItem(x));
                     }
-                    if ((pResource->LogNameSingular[0]) && (CheckWildcardMatch(wcBuffer, pResource->LogNameSingular[0])))
+                    else if ((pResource->LogNameSingular[0]) && (CheckWildcardMatch(wcBuffer, pResource->LogNameSingular[0])))
                     {
                         matchIds.push_back(CreateSearchItem(x));
                     }
