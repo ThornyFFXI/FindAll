@@ -125,7 +125,7 @@ std::vector<SearchItem_t> FindAll::GetMatchingItems(const char* term)
 
     //Match numerical ids..
     bool isNumber = true;
-    for (const char* chr = term; chr != 0x00; chr++)
+    for (const char* chr = term; chr[0] != 0x00; chr++)
     {
         if (!isdigit(chr[0]))
         {
