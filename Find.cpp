@@ -41,6 +41,7 @@ uint32_t FindAll::ThreadEntry()
     InterlockedExchange(&mPending.State, (uint32_t)SearchState::Complete);
     return 0;
 }
+
 bool FindAll::CheckWildcardMatch(const char* wc, const char* compare)
 {
     while (*wc)
@@ -66,6 +67,7 @@ bool FindAll::CheckWildcardMatch(const char* wc, const char* compare)
     }
     return (*compare == 0);
 }
+
 SearchItem_t FindAll::CreateSearchItem(uint16_t id)
 {
     SearchItem_t item;
@@ -86,6 +88,7 @@ SearchItem_t FindAll::CreateSearchItem(uint16_t id)
     }
     return item;
 }
+
 void FindAll::FindAcrossCharacters(std::vector<std::string> terms)
 {
     if (InterlockedCompareExchange(&mPending.State, (uint32_t)SearchState::InProgress, (uint32_t)SearchState::Idle) != (uint32_t)SearchState::Idle)
@@ -103,6 +106,7 @@ void FindAll::FindAcrossCharacters(std::vector<std::string> terms)
 
     this->Start();
 }
+
 void FindAll::FindLocal(std::vector<std::string> terms)
 {
     if (InterlockedCompareExchange(&mPending.State, (uint32_t)SearchState::InProgress, (uint32_t)SearchState::Idle) != (uint32_t)SearchState::Idle)
@@ -119,9 +123,88 @@ void FindAll::FindLocal(std::vector<std::string> terms)
 
     this->Start();
 }
+
+std::vector<SearchItem_t> FindAll::GetMatchingKeyItems(const char* term)
+{
+    std::vector<SearchItem_t> matchIds;
+
+    //Match numerical ids..
+    bool isNumber = true;
+    for (const char* chr = term; chr[0] != 0x00; chr++)
+    {
+        if (!isdigit(chr[0]))
+        {
+            isNumber = false;
+            break;
+        }
+    }
+    if (isNumber)
+    {
+        int32_t id = atoi(term);
+        if ((id >= 0) && (id < 4096))
+        {
+            const char* matchString = m_AshitaCore->GetResourceManager()->GetString("keyitems.names", id);
+            if (matchString != nullptr)
+            {
+                matchIds.push_back(SearchItem_t((uint16_t)id));
+                return matchIds;
+            }
+        }
+    }
+
+    //Match wildcard
+    if (strstr(term, "*"))
+    {
+        for (uint16_t x = 0; x < 4096; x++)
+        {
+            const char* matchString = m_AshitaCore->GetResourceManager()->GetString("keyitems.names", x);
+            if ((matchString != nullptr) && (CheckWildcardMatch(term, matchString)))
+            {
+                matchIds.push_back(SearchItem_t(x));
+            }
+        }
+    }
+
+    //Match standard
+    else
+    {
+        for (uint16_t x = 0; x < 4096; x++)
+        {
+            const char* matchString = m_AshitaCore->GetResourceManager()->GetString("keyitems.names", x);
+            if ((matchString != nullptr) && (_stricmp(term, matchString) == 0))
+            {
+                matchIds.push_back(SearchItem_t(x));
+            }
+        }
+
+        //revert to wildcard match if no exact match..
+        if (matchIds.size() == 0)
+        {
+            char wcBuffer[256];
+            sprintf_s(wcBuffer, 256, "*%s*", term);
+
+            for (uint16_t x = 0; x < 4096; x++)
+            {
+                const char* matchString = m_AshitaCore->GetResourceManager()->GetString("keyitems.names", x);
+                if ((matchString != nullptr) && (CheckWildcardMatch(wcBuffer, matchString)))
+                {
+                    matchIds.push_back(SearchItem_t(x));
+                }
+            }
+        }
+    }
+
+    return matchIds;
+}
+
 std::vector<SearchItem_t> FindAll::GetMatchingItems(const char* term)
 {
     std::vector<SearchItem_t> matchIds;
+
+    if (_strnicmp(term, "KI:", 3) == 0)
+    {
+        return GetMatchingKeyItems(term + 3);
+    }
 
     //Match numerical ids..
     bool isNumber = true;
@@ -204,6 +287,7 @@ std::vector<SearchItem_t> FindAll::GetMatchingItems(const char* term)
     }
     return matchIds;
 }
+
 std::vector<SearchResult_t> FindAll::QueryCache(std::vector<SearchItem_t> itemIds, QueriableCache* pCache)
 {
     std::vector<SearchResult_t> results;
@@ -211,35 +295,55 @@ std::vector<SearchResult_t> FindAll::QueryCache(std::vector<SearchItem_t> itemId
     {
         SearchResult_t result;
         strcpy_s(result.Character.Name, 16, pCache->GetCharacterName());
-        result.Character.Id = pCache->GetCharacterId();
-        result.Id                   = iSearch->ItemId;
-        result.Resource             = m_AshitaCore->GetResourceManager()->GetItemById(result.Id);
+        result.Character.Id         = pCache->GetCharacterId();
         result.StorageSlipContainer = -1;
         result.Total                = 0;
-        for (int container = 0; container < CONTAINER_MAX; container++)
+
+        if (iSearch->KeyItemId != 65535)
         {
-            result.Count[container]      = 0;
-            for (int index = 0; index < 81; index++)
+            if (pCache->GetHasKeyItem(iSearch->KeyItemId))
             {
-                Ashita::FFXI::item_t* pItem = pCache->GetContainerItem(container, index);
-                if (pItem->Id == iSearch->ItemId)
+                result.KeyItem         = iSearch->KeyItemId;
+                result.KeyItemResource = m_AshitaCore->GetResourceManager()->GetString("keyitems.names", iSearch->KeyItemId);
+                if (result.KeyItemResource != nullptr)
                 {
-                    result.Count[container] += pItem->Count;
-                    result.Total += pItem->Count;
+                    for (int x = 1; x < CONTAINER_MAX; x++)
+                        result.Count[x] = 0;
+                    result.Count[0] = 1;
+                    result.Total    = 1;
                 }
             }
-
-            if (iSearch->SlipId != 0)
+        }
+        else
+        {
+            result.KeyItem              = 65535;
+            result.Id                   = iSearch->ItemId;
+            result.Resource             = m_AshitaCore->GetResourceManager()->GetItemById(result.Id);
+            for (int container = 0; container < CONTAINER_MAX; container++)
             {
+                result.Count[container] = 0;
                 for (int index = 0; index < 81; index++)
                 {
                     Ashita::FFXI::item_t* pItem = pCache->GetContainerItem(container, index);
-                    if (pItem->Id == iSearch->SlipId)
+                    if (pItem->Id == iSearch->ItemId)
                     {
-                        if (Ashita::BinaryData::UnpackBitsBE(pItem->Extra, iSearch->SlipOffset, 1))
+                        result.Count[container] += pItem->Count;
+                        result.Total += pItem->Count;
+                    }
+                }
+
+                if (iSearch->SlipId != 0)
+                {
+                    for (int index = 0; index < 81; index++)
+                    {
+                        Ashita::FFXI::item_t* pItem = pCache->GetContainerItem(container, index);
+                        if (pItem->Id == iSearch->SlipId)
                         {
-                            result.StorageSlipContainer = container;
-                            result.Total++;
+                            if (Ashita::BinaryData::UnpackBitsBE(pItem->Extra, iSearch->SlipOffset, 1))
+                            {
+                                result.StorageSlipContainer = container;
+                                result.Total++;
+                            }
                         }
                     }
                 }

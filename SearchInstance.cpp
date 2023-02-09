@@ -40,16 +40,32 @@ SearchInstance::SearchInstance(std::vector<SearchResult_t> results, std::vector<
     //Preprocessing to fill prior vectors
     for (auto resultIter = results.begin(); resultIter != results.end(); resultIter++)
     {
-        IItem* pResource = resultIter->Resource;
-        ItemStub_t stub(resultIter->Resource, resultIter->Total);
-        auto pStub       = std::find(itemStubs.begin(), itemStubs.end(), stub);
-        if (pStub == itemStubs.end())
+        if (resultIter->KeyItem == 65535)
         {
-            itemStubs.push_back(stub);
+            IItem* pResource = resultIter->Resource;
+            ItemStub_t stub(resultIter->Resource, resultIter->Total);
+            auto pStub = std::find(itemStubs.begin(), itemStubs.end(), stub);
+            if (pStub == itemStubs.end())
+            {
+                itemStubs.push_back(stub);
+            }
+            else
+            {
+                pStub->Count += resultIter->Total;
+            }
         }
         else
         {
-            pStub->Count += resultIter->Total;
+            ItemStub_t stub(resultIter->KeyItem, resultIter->KeyItemResource);
+            auto pStub = std::find(itemStubs.begin(), itemStubs.end(), stub);
+            if (pStub == itemStubs.end())
+            {
+                itemStubs.push_back(stub);
+            }
+            else
+            {
+                pStub->Count++;
+            }
         }
 
         if (std::find(mCharacters.begin(), mCharacters.end(), resultIter->Character) == mCharacters.end())
@@ -94,17 +110,30 @@ SearchInstance::SearchInstance(std::vector<SearchResult_t> results, std::vector<
     std::vector<std::string> duplicateItems;
     for (auto iStub = itemStubs.begin(); iStub != itemStubs.end(); iStub++)
     {
-        std::string name(iStub->pResource->Name[0]);
-        if (std::find(duplicateItems.begin(), duplicateItems.end(), name) == duplicateItems.end())
+        ItemInfo_t info;
+        if (iStub->KeyItem == 65535)
         {
-            duplicateItems.push_back(name);
+            info.IsKeyItem = false;
+            info.Id        = iStub->pResource->Id;
+            info.Name = std::string(iStub->pResource->Name[0]);
+        }
+        else
+        {
+            info.IsKeyItem = true;
+            info.Id        = iStub->KeyItem;
+            info.Name = std::string(iStub->KeyItemResource);
+        }
+
+        if (std::find(duplicateItems.begin(), duplicateItems.end(), info.Name) == duplicateItems.end())
+        {
+            duplicateItems.push_back(info.Name);
         }
         else
         {
             mDuplicateItemName = true;
         }
 
-        mItemResources.push_back(iStub->pResource);
+        mItemResources.push_back(info);
         mItemCount++;
     }
    
@@ -115,11 +144,11 @@ SearchInstance::SearchInstance(std::vector<SearchResult_t> results, std::vector<
             return (cmp < 0);
         return (lhs.Id < rhs.Id);
     });
-    std::sort(mItemResources.begin(), mItemResources.end(), [](IItem* const& lhs, IItem* const& rhs) {
-        int cmp = strcmp(lhs->Name[0], rhs->Name[0]);
+    std::sort(mItemResources.begin(), mItemResources.end(), [](ItemInfo_t const& lhs, ItemInfo_t const& rhs) {
+        int cmp = strcmp(lhs.Name.c_str(), rhs.Name.c_str());
         if (cmp != 0)
             return (cmp < 0);
-        return (lhs->Id < rhs->Id);
+        return (lhs.Id < rhs.Id);
     });
     std::sort(mLocationIndices.begin(), mLocationIndices.end());
 
@@ -193,15 +222,16 @@ void SearchInstance::BuildSearchTable()
             for (auto columnIter = mItemResources.begin(); columnIter != mItemResources.end(); columnIter++)
             {
                 if (mDuplicateItemName)
-                    sprintf_s(buffer, 256, "%s[%u]", (*columnIter)->Name[0], (*columnIter)->Id);
+                    sprintf_s(buffer, 256, "%s[%u]", (*columnIter).Name.c_str(), (*columnIter).Id);
                 else
-                    strcpy_s(buffer, 256, (*columnIter)->Name[0]);
+                    strcpy_s(buffer, 256, (*columnIter).Name.c_str());
                 pSearchTable->SetColumnHeader(column, buffer);
 
                 int count = 0;
                 for (auto resultIter = rowMatches.begin(); resultIter != rowMatches.end(); resultIter++)
                 {
-                    if ((*resultIter)->Id == ((*columnIter)->Id))
+                    bool isMatch = (*columnIter).IsKeyItem ? (((*resultIter)->KeyItem) == ((*columnIter).Id)) : ((*resultIter)->Id == ((*columnIter).Id));
+                    if (isMatch)
                     {
                         count += (*resultIter)->Count[*rowIter];
                         if ((*resultIter)->StorageSlipContainer == *rowIter)
@@ -229,7 +259,7 @@ void SearchInstance::BuildSearchTable()
         }
         else
         {
-            sprintf_s(buffer, 256, "%s", (*mItemResources.begin())->Name[0]);
+            sprintf_s(buffer, 256, "%s", (*mItemResources.begin()).Name.c_str());
         }
         pSearchTable->SetColumnHeader(0, buffer);
 
@@ -308,15 +338,16 @@ void SearchInstance::BuildSearchTable()
             for (auto columnIter = mItemResources.begin(); columnIter != mItemResources.end(); columnIter++)
             {
                 if (mDuplicateItemName)
-                    sprintf_s(buffer, 256, "%s[%u]", (*columnIter)->Name[0], (*columnIter)->Id);
+                    sprintf_s(buffer, 256, "%s[%u]", (*columnIter).Name.c_str(), (*columnIter).Id);
                 else
-                    strcpy_s(buffer, 256, (*columnIter)->Name[0]);
+                    strcpy_s(buffer, 256, (*columnIter).Name.c_str());
                 pSearchTable->SetColumnHeader(column, buffer);
 
                 int count = 0;
                 for (auto resultIter = rowMatches.begin(); resultIter != rowMatches.end(); resultIter++)
                 {
-                    if ((*resultIter)->Id == ((*columnIter)->Id))
+                    bool isMatch = (*columnIter).IsKeyItem ? (((*resultIter)->KeyItem) == ((*columnIter).Id)) : ((*resultIter)->Id == ((*columnIter).Id));
+                    if (isMatch)
                     {
                         count += (*resultIter)->Total;
                     }

@@ -8,11 +8,33 @@
 #include "C:\Ashita 4\plugins\sdk\Ashita.h"
 #include "InventoryCache.h"
 
+struct ItemInfo_t
+{
+    bool IsKeyItem;
+    uint16_t Id;
+    std::string Name;
+};
+
 struct SearchItem_t
 {
     uint16_t ItemId;
+    uint16_t KeyItemId;
     uint16_t SlipId;
     uint16_t SlipOffset;
+
+    SearchItem_t()
+        : ItemId(0)
+        , KeyItemId(65535)
+        , SlipId(0)
+        , SlipOffset(0)
+    {}
+
+    SearchItem_t(uint16_t keyItem)
+        : ItemId(0)
+        , KeyItemId(keyItem)
+        , SlipId(0)
+        , SlipOffset(0)
+    {}
 };
 
 struct StorageSlip_t
@@ -26,23 +48,39 @@ struct SearchResult_t
     CharacterIdentifier_t Character;
     uint16_t Id;
     IItem* Resource;
+    uint16_t KeyItem;
+    const char* KeyItemResource;
     uint32_t Total;
     uint32_t Count[CONTAINER_MAX];
     int16_t StorageSlipContainer;
 };
 struct ItemStub_t
 {
+    uint16_t KeyItem;
+    const char* KeyItemResource;
     uint32_t Count;
     IItem* pResource;
 
     ItemStub_t(IItem* resource, uint32_t count)
         : pResource(resource)
         , Count(count)
+        , KeyItem(65535)
+        , KeyItemResource(nullptr)
+    {}
+
+    ItemStub_t(uint16_t keyItem, const char* keyResource)
+        : pResource(nullptr)
+        , Count(1)
+        , KeyItem(keyItem)
+        , KeyItemResource(keyResource)
     {}
 
     bool operator==(const ItemStub_t& other)
     {
-        return (pResource == other.pResource);
+        if (KeyItem == 65535)
+            return (pResource == other.pResource);
+        else
+            return (KeyItem == other.KeyItem);
     }
 };
 
@@ -158,7 +196,7 @@ private:
     SearchTable* pSearchTable;
 
     std::vector<CharacterIdentifier_t> mCharacters;
-    std::vector<IItem*> mItemResources;
+    std::vector<ItemInfo_t> mItemResources;
     std::vector<int32_t> mLocationIndices;
 
     int mCharacterCount;

@@ -6,18 +6,23 @@ InventoryCache::InventoryCache(IAshitaCore* pAshitaCore, FindAllConfig* pConfig)
     , pConfig(pConfig)
 {
     ClearCache(mContainers);
+    memset(mKeyItems, 0, 4096);
     uint16_t myIndex = pAshitaCore->GetMemoryManager()->GetParty()->GetMemberTargetIndex(0);
     if (myIndex > 0)
     {
         strcpy_s(mCharacter.Name, 16, pAshitaCore->GetMemoryManager()->GetEntity()->GetName(myIndex));
+        for (int x = 0; x < 3584; x++)
+        {
+            mKeyItems[x] = pAshitaCore->GetMemoryManager()->GetPlayer()->HasKeyItem(x);
+        }
     }
     else
     {
         strcpy_s(mCharacter.Name, 16, "Unknown");
     }
-    mCharacter.Id = 0;
-    mSwappable = false;
-    mSwapStatus   = SwapStatus::InActive;
+    mCharacter.Id  = 0;
+    mSwappable     = false;
+    mSwapStatus    = SwapStatus::InActive;
     mWritesPending = true;
 }
 Ashita::FFXI::item_t InventoryCache::GetContainerItem(int container, int index)
@@ -67,7 +72,7 @@ void InventoryCache::HandleIncomingPacket(uint16_t id, uint32_t size, const uint
             memcpy(mCharacter.Name, data + 0x84, 16);
             mCharacter.Id = *((uint32_t*)(data + 4));
             ClearCache(mContainers);
-            mSwappable    = false;
+            mSwappable     = false;
             mWritesPending = true;
             sprintf_s(mFilePath, 256, "%sconfig\\plugins\\findall\\cache\\%s_%u.bin", pAshitaCore->GetInstallPath(), mCharacter.Name, mCharacter.Id);
         }
@@ -105,7 +110,7 @@ void InventoryCache::HandleIncomingPacket(uint16_t id, uint32_t size, const uint
         }
         if (pPacket->Count == 0)
         {
-            *pItem = {0};
+            *pItem       = {0};
             pItem->Index = pPacket->Index;
             if (mSwapStatus == SwapStatus::Pending)
             {
@@ -150,18 +155,18 @@ void InventoryCache::HandleIncomingPacket(uint16_t id, uint32_t size, const uint
             }
             pSwap->Count = pItem->Count;
             pSwap->Flags = pItem->Flags;
-            pSwap->Id   = pItem->Id;
+            pSwap->Id    = pItem->Id;
         }
     }
     if (id == 0x020)
     {
-        pk_CreateItem* pPacket = (pk_CreateItem*)data;
+        pk_CreateItem* pPacket    = (pk_CreateItem*)data;
         Ashita::FFXI::item_t item = {0};
-        item.Index             = pPacket->Index;
+        item.Index                = pPacket->Index;
         item.Count                = pPacket->Count;
         memcpy(item.Extra, pPacket->ExtData, 24);
-        item.Flags = pPacket->Flags;
-        item.Id    = pPacket->Id;
+        item.Flags                  = pPacket->Flags;
+        item.Id                     = pPacket->Id;
         item.Price                  = pPacket->Bazaar;
         Ashita::FFXI::item_t* pItem = &(mContainers[pPacket->Container].Items[pPacket->Index]);
 
@@ -173,7 +178,25 @@ void InventoryCache::HandleIncomingPacket(uint16_t id, uint32_t size, const uint
         if (mSwapStatus == SwapStatus::Pending)
         {
             Ashita::FFXI::item_t* pSwap = &(mSwap[pPacket->Container].Items[pPacket->Index]);
-            *pSwap             = item;
+            *pSwap                      = item;
+        }
+    }
+    if (id == 0x55)
+    {
+        pk_KeyItemUpdate* pPacket = (pk_KeyItemUpdate*)data;
+        int32_t offset            = (int32_t)pPacket->Offset * 512;
+        for (int x = 0; x < 0x40; x++)
+        {
+            for (int y = 0; y < 8; y++)
+            {
+                bool hasKeyItem = ((pPacket->KeyItemAvailable[x] >> y) & 0x01);
+                if (hasKeyItem != mKeyItems[offset])
+                {
+                    mKeyItems[offset] = hasKeyItem;
+                    QueueWrite();
+                }
+                offset++;
+            }
         }
     }
 }
@@ -186,7 +209,7 @@ void InventoryCache::HandleTick()
         {
             FlushCacheToMemory();
         }
-        mSwapStatus   = SwapStatus::InActive;
+        mSwapStatus = SwapStatus::InActive;
         QueueWrite();
     }
     if (pConfig->GetCacheToDisc())
@@ -204,14 +227,20 @@ void InventoryCache::HandleTick()
         }
     }
 }
+bool InventoryCache::GetHasKeyItem(int id)
+{
+    if ((id < 0) || (id > 4095))
+        return false;
 
+    return mKeyItems[id];
+}
 void InventoryCache::ClearCache(Ashita::FFXI::items_t* cache)
 {
     for (int container = 0; container < CONTAINER_MAX; container++)
     {
         for (int index = 0; index < 81; index++)
         {
-            cache[container].Items[index] = {0};
+            cache[container].Items[index]       = {0};
             cache[container].Items[index].Index = index;
         }
     }
@@ -248,7 +277,7 @@ void InventoryCache::CreateDirectories(const char* fileName)
 void InventoryCache::QueueWrite()
 {
     mWritesPending = true;
-    mWriteTime = std::chrono::steady_clock::now() + std::chrono::milliseconds(pConfig->GetWritePeriod());
+    mWriteTime     = std::chrono::steady_clock::now() + std::chrono::milliseconds(pConfig->GetWritePeriod());
 }
 bool InventoryCache::TryWriteFile()
 {
@@ -270,6 +299,7 @@ bool InventoryCache::TryWriteFile()
                 writer.write((char*)&mContainers[x].Items[y], sizeof(Ashita::FFXI::item_t));
             }
         }
+        writer.write((char*)mKeyItems, 4096);
     }
     catch (...)
     {
@@ -291,6 +321,10 @@ QueriableCache::QueriableCache(InventoryCache* pCache)
             mContainers[container].Items[index] = pCache->GetContainerItem(container, index);
         }
     }
+    for (int x = 0; x < 4096; x++)
+    {
+        mKeyItems[x] = pCache->GetHasKeyItem(x);
+    }
     mLoaded = true;
 }
 QueriableCache::QueriableCache(const char* fileName)
@@ -307,7 +341,7 @@ QueriableCache::QueriableCache(const char* fileName)
     else
     {
         mLoaded = false;
-    }       
+    }
 }
 const char* QueriableCache::GetCharacterName()
 {
@@ -320,6 +354,13 @@ uint32_t QueriableCache::GetCharacterId()
 Ashita::FFXI::item_t* QueriableCache::GetContainerItem(int container, int index)
 {
     return &mContainers[container].Items[index];
+}
+bool QueriableCache::GetHasKeyItem(int id)
+{
+    if ((id < 0) || (id > 4095))
+        return false;
+
+    return mKeyItems[id];
 }
 bool QueriableCache::IsLoaded()
 {
@@ -377,28 +418,41 @@ bool QueriableCache::TryLoadFile(const char* fileName)
     {
         reader.read(mCharacter.Name, 16);
         reader.read((char*)&mCharacter.Id, 4);
+
         for (container = 0; container < CONTAINER_MAX; container++)
         {
+            if (reader.peek() == EOF)
+            {
+                for (index = 0; index < 81; index++)
+                {
+                    blank.Index                         = index;
+                    mContainers[container].Items[index] = blank;
+                    index++;
+                }
+                continue;
+            }
+
             if (container == (int)Ashita::FFXI::Enums::Container::Temporary)
                 continue;
 
             for (index = 0; index < 81; index++)
             {
-                if (reader.peek() == EOF)
+                reader.read((char*)&mContainers[container].Items[index], sizeof(Ashita::FFXI::item_t));
+                if (mContainers[container].Items[index].Index != index)
                 {
-                    blank.Index = index;
-                    memcpy((char*)&mContainers[container].Items[index], &blank, sizeof(Ashita::FFXI::item_t));
-                }
-                else
-                {
-                    reader.read((char*)&mContainers[container].Items[index], sizeof(Ashita::FFXI::item_t));
-                    if (mContainers[container].Items[index].Index != index)
-                    {
-                        reader.close();
-                        return false;
-                    }
+                    reader.close();
+                    return false;
                 }
             }
+        }
+
+        if (reader.peek() == EOF)
+        {
+            memset(mKeyItems, 0, 4096);
+        }
+        else
+        {
+            reader.read((char*)mKeyItems, 4096);
         }
     }
     catch (...)

@@ -61,7 +61,7 @@ public:
     }
     double GetVersion(void) const override
     {
-        return 1.12f;
+        return 1.13f;
     }
     int32_t GetPriority(void) const override
     {
@@ -89,6 +89,7 @@ private:
     SearchItem_t CreateSearchItem(uint16_t id);
     void FindAcrossCharacters(std::vector<std::string> terms);
     void FindLocal(std::vector<std::string> terms);
+    std::vector<SearchItem_t> GetMatchingKeyItems(const char* term);
     std::vector<SearchItem_t> GetMatchingItems(const char* term);
     std::vector<SearchResult_t> QueryCache(std::vector<SearchItem_t> itemIds, QueriableCache* pCache);
 

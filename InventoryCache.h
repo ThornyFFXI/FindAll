@@ -50,6 +50,17 @@ struct pk_CreateItem
     uint8_t Padding[3];
 };
 
+//0x55
+struct pk_KeyItemUpdate
+{
+    uint32_t Header;
+    uint8_t KeyItemAvailable[0x40];
+    uint8_t KeyItemExamined[0x40];
+    uint8_t Offset;
+    uint8_t Padding;
+    uint16_t Padding2;
+};
+
 struct CharacterIdentifier_t
 {
     char Name[16];
@@ -82,12 +93,14 @@ private:
 
     SwapStatus mSwapStatus;
     Ashita::FFXI::items_t mSwap[CONTAINER_MAX];
+    bool mKeyItems[4096];
 
 public:
     InventoryCache(IAshitaCore* pAshitaCore, FindAllConfig* pConfig);
     Ashita::FFXI::item_t GetContainerItem(int container, int index);
     void HandleIncomingPacket(uint16_t id, uint32_t size, const uint8_t* data);
     void HandleTick();
+    bool GetHasKeyItem(int id);
 
 private:
     void ClearCache(Ashita::FFXI::items_t* cache);
@@ -102,6 +115,7 @@ class QueriableCache
 private:
     CharacterIdentifier_t mCharacter;
     Ashita::FFXI::items_t mContainers[CONTAINER_MAX];
+    bool mKeyItems[4096];
     bool mLoaded;
     
 public:
@@ -111,6 +125,7 @@ public:
     const char* GetCharacterName();
     uint32_t GetCharacterId();
     Ashita::FFXI::item_t* GetContainerItem(int container, int index);
+    bool GetHasKeyItem(int id);
     bool IsLoaded();
     bool TryLoadFile(const char* fileName);
     static void LoadAll(IAshitaCore* pAshitaCore, std::vector<QueriableCache*>* pCaches);
