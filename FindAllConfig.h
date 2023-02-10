@@ -19,6 +19,7 @@ struct FindAllSettings_t
     int32_t DisplayMax;
     FindAllDisplayMode DisplayMode;
     bool InstantLoad;
+    bool RequireKeyItemPrefix;
     uint32_t WritePeriod;
 
     FindAllSettings_t()
@@ -26,6 +27,7 @@ struct FindAllSettings_t
         , DisplayMax(8)
         , DisplayMode(FindAllDisplayMode::ImGui)
         , InstantLoad(false)
+        , RequireKeyItemPrefix(true)
         , WritePeriod(20000)
     {}
 };
@@ -42,12 +44,14 @@ public:
     int32_t GetDisplayMax();
     FindAllDisplayMode GetDisplayMode();
     bool GetInstantLoad();
+    bool GetKeyItemPrefix();
     uint32_t GetWritePeriod();
 
     void SetCacheToDisc(bool value);
     void SetDisplayMax(int32_t value);
     void SetDisplayMode(FindAllDisplayMode mode);
     void SetInstantLoad(bool value);
+    void SetKeyItemPrefix(bool required);
     void SetWritePeriod(uint32_t milliseconds);
     
     ConfigSaveStyle GetDefaultSaveStyle() override;

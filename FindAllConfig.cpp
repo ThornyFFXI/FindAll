@@ -24,6 +24,10 @@ bool FindAllConfig::GetInstantLoad()
 {
     return mSettings.InstantLoad;
 }
+bool FindAllConfig::GetKeyItemPrefix()
+{
+    return mSettings.RequireKeyItemPrefix;
+}
 uint32_t FindAllConfig::GetWritePeriod()
 {
     return mSettings.WritePeriod;
@@ -62,6 +66,14 @@ void FindAllConfig::SetInstantLoad(bool value)
         ConfigLoader::pLoader->SaveSettings();
     }
 }
+void FindAllConfig::SetKeyItemPrefix(bool required)
+{
+    if (mSettings.RequireKeyItemPrefix != required)
+    {
+        mSettings.RequireKeyItemPrefix = required;
+        ConfigLoader::pLoader->SaveSettings();
+    }
+}
 void FindAllConfig::SetWritePeriod(uint32_t milliseconds)
 {
     uint32_t newPeriod = min(300000, milliseconds);
@@ -79,30 +91,35 @@ ConfigSaveStyle FindAllConfig::GetDefaultSaveStyle()
 
 bool FindAllConfig::LoadConfig(xml_node<>* pRoot, const char* errorBuffer)
 {
+    mSettings = FindAllSettings_t();
     for (xml_node<>* pNode = pRoot->first_node(); pNode; pNode = pNode->next_sibling())
     {
         if (_stricmp(pNode->name(), "instantload") == 0)
         {
-            SetInstantLoad(_stricmp(pNode->value(), "enabled") == 0);
+            mSettings.InstantLoad = (_stricmp(pNode->value(), "enabled") == 0);
         }
         else if (_stricmp(pNode->name(), "cachetodisc") == 0)
         {
-            SetCacheToDisc(_stricmp(pNode->value(), "enabled") == 0);
+            mSettings.CacheToDisc = (_stricmp(pNode->value(), "enabled") == 0);
         }
         else if (_stricmp(pNode->name(), "displaymax") == 0)
         {
-            SetDisplayMax(atoi(pNode->value()));
+            mSettings.DisplayMax = atoi(pNode->value());
         }
         else if (_stricmp(pNode->name(), "displaymode") == 0)
         {
             if (_stricmp(pNode->value(), "imgui") == 0)
-                SetDisplayMode(FindAllDisplayMode::ImGui);
+                mSettings.DisplayMode = FindAllDisplayMode::ImGui;
             else
-                SetDisplayMode(FindAllDisplayMode::ChatLog);
+                mSettings.DisplayMode = FindAllDisplayMode::ChatLog;
+        }
+        else if (_stricmp(pNode->name(), "requirekeyitemprefix") == 0)
+        {
+            mSettings.RequireKeyItemPrefix = (_stricmp(pNode->value(), "enabled") == 0);
         }
         else if (_stricmp(pNode->name(), "writedelay") == 0)
         {
-            SetWritePeriod(static_cast<uint32_t>(atoll(pNode->value())));
+            mSettings.WritePeriod = static_cast<uint32_t>(atoll(pNode->value()));
         }
     }
     return true;
@@ -124,6 +141,9 @@ bool FindAllConfig::SaveConfig(ofstream* pStream, const char* errorBuffer)
 
     *pStream << "    <!--When set to imgui, this plugin will display search results in an imgui window.  When set to chatlog, they will be displayed in chat log.-->\n";
     *pStream << "    <displaymode>" << ((GetDisplayMode() == FindAllDisplayMode::ImGui) ? "imgui" : "chatlog") << "</displaymode>\n\n";
+
+    *pStream << "    <!--When set to enabled, you must type ki: prior to a search term to include key items in the search.-->\n";
+    *pStream << "    <requirekeyitemprefix>" << (GetKeyItemPrefix() ? "enabled" : "disabled") << "</requirekeyitemprefix>\n\n";
 
     *pStream << "    <!--The delay, in milliseconds, after an item changes before it is written to cache.  This prevents extensive writes when inventory is frequently changing.-->\n";
     *pStream << "    <writedelay>" << std::to_string(GetWritePeriod()) << "</writedelay>\n\n";

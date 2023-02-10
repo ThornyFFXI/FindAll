@@ -201,7 +201,13 @@ std::vector<SearchItem_t> FindAll::GetMatchingItems(const char* term)
 {
     std::vector<SearchItem_t> matchIds;
 
-    if (_strnicmp(term, "KI:", 3) == 0)
+    if (mConfig.GetKeyItemPrefix() == false)
+    {
+        auto keyItemEntries = GetMatchingKeyItems(term);
+        matchIds.insert(matchIds.end(), keyItemEntries.begin(), keyItemEntries.end());
+    }
+    
+    else if (_strnicmp(term, "KI:", 3) == 0)
     {
         return GetMatchingKeyItems(term + 3);
     }

@@ -42,6 +42,24 @@ void FindAll::HandleCommandInternal(std::vector<std::string> args, int argCount)
             return;
         }
 
+        if ARG (2, "keyitemprefix")
+        {
+            if (ARG(3, "on") || ARG(3, "enabled"))
+            {
+                mConfig.SetKeyItemPrefix(true);
+            }
+            else if (ARG(3, "off") || ARG(3, "disabled"))
+            {
+                mConfig.SetKeyItemPrefix(false);
+            }
+            else
+            {
+                mConfig.SetKeyItemPrefix(!mConfig.GetKeyItemPrefix());
+            }
+            OutputHelper::Outputf(Ashita::LogLevel::Info, "KeyItemPrefix $H%s$R.", mConfig.GetKeyItemPrefix() ? "Enabled" : "Disabled");
+            return;
+        }
+
         if ARG (2, "displaymax")
         {
             if (argCount > 3)
