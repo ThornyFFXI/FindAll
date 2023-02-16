@@ -201,16 +201,24 @@ std::vector<SearchItem_t> FindAll::GetMatchingItems(const char* term)
 {
     std::vector<SearchItem_t> matchIds;
 
-    if (mConfig.GetKeyItemPrefix() == false)
+    if (_strnicmp(term, "KI:", 3) == 0)
+    {
+        return GetMatchingKeyItems(term + 3);
+    }
+
+
+    if (_strnicmp(term, "ITEM:", 5) == 0)
+    {
+        term += 5;
+    }
+
+    else if (mConfig.GetKeyItemPrefix() == false)
     {
         auto keyItemEntries = GetMatchingKeyItems(term);
         matchIds.insert(matchIds.end(), keyItemEntries.begin(), keyItemEntries.end());
     }
     
-    else if (_strnicmp(term, "KI:", 3) == 0)
-    {
-        return GetMatchingKeyItems(term + 3);
-    }
+    int matchCount = matchIds.size();
 
     //Match numerical ids..
     bool isNumber = true;
@@ -268,8 +276,8 @@ std::vector<SearchItem_t> FindAll::GetMatchingItems(const char* term)
             }
         }
 
-        //revert to wildcard match if no exact match..
-        if (matchIds.size() == 0)
+        //revert to wildcard match if no exact item match..
+        if (matchIds.size() == matchCount)
         {
             char wcBuffer[256];
             sprintf_s(wcBuffer, 256, "*%s*", term);
