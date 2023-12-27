@@ -436,6 +436,21 @@
         <item offset="106" id="23796" /> <!--Ziamet Nails-->
         <item offset="107" id="22032" /> <!--Thunder Hammer-->
         <item offset="108" id="22043" /> <!--Apkallu Scepter-->
+        <item offset="109" id="21530" /> <!--Tokkosho-->
+        <item offset="110" id="22044" /> <!--Tengu War Fan-->
+        <item offset="111" id="26273" /> <!--Tengu Shawl-->
+        <item offset="112" id="25415" /> <!--Rep. Plat. Medal-->
+        <item offset="113" id="25416" /> <!--Sibyl Scarf-->
+        <item offset="114" id="25414" /> <!--Elite Royal Collar-->
+        <item offset="115" id="22050" /> <!--Chac-chacs-->
+        <item offset="116" id="22302" /> <!--Oshasha's Treatise-->
+        <item offset="117" id="26365" /> <!--Cornelia's Belt-->
+        <item offset="118" id="26366" /> <!--Plat. Mog. Belt-->
+        <item offset="119" id="23862" /> <!--Boudox's Masque-->
+        <item offset="120" id="23863" /> <!--Boudox's Suit-->
+        <item offset="121" id="23864" /> <!--Magh Bihu's Masque-->
+        <item offset="122" id="23865" /> <!--Magh Bihu's Suit-->
+        <item offset="123" id="21536" /> <!--Dazbog's Knuckles-->
     </slip>
     <slip id="29315">
         <item offset="0" id="12511" /> <!--Fighter's Mask-->
@@ -532,12 +547,12 @@
         <item offset="91" id="14578" /> <!--Dancer's Casaque-->
         <item offset="92" id="15002" /> <!--Dancer's Bangles-->
         <item offset="93" id="15659" /> <!--Dancer's Tights-->
-        <item offset="94" id="15746" /> <!--Dancer's Shoes-->
+        <item offset="94" id="15746" /> <!--Dancer's Toe Shoes-->
         <item offset="95" id="16139" /> <!--Dancer's Tiara-->
         <item offset="96" id="14579" /> <!--Dancer's Casaque-->
         <item offset="97" id="15003" /> <!--Dancer's Bangles-->
         <item offset="98" id="15660" /> <!--Dancer's Tights-->
-        <item offset="99" id="15747" /> <!--Dancer's Shoes-->
+        <item offset="99" id="15747" /> <!--Dancer's Toe Shoes-->
         <item offset="100" id="16140" /> <!--Scholar's M.board-->
         <item offset="101" id="14580" /> <!--Scholar's Gown-->
         <item offset="102" id="15004" /> <!--Scholar's Bracers-->
@@ -672,12 +687,12 @@
         <item offset="91" id="11302" /> <!--Dnc. Casaque +1-->
         <item offset="92" id="15035" /> <!--Dnc. Bangles +1-->
         <item offset="93" id="16357" /> <!--Dancer's Tights +1-->
-        <item offset="94" id="11393" /> <!--Dancer's Shoes +1-->
+        <item offset="94" id="11393" /> <!--Dancer's Toe Shoes +1-->
         <item offset="95" id="11476" /> <!--Dancer's Tiara +1-->
         <item offset="96" id="11303" /> <!--Dnc. Casaque +1-->
         <item offset="97" id="15036" /> <!--Dnc. Bangles +1-->
         <item offset="98" id="16358" /> <!--Dancer's Tights +1-->
-        <item offset="99" id="11394" /> <!--Dancer's Shoes +1-->
+        <item offset="99" id="11394" /> <!--Dancer's Toe Shoes +1-->
         <item offset="100" id="11477" /> <!--Sch. M.board +1-->
         <item offset="101" id="11304" /> <!--Scholar's Gown +1-->
         <item offset="102" id="15037" /> <!--Sch. Bracers +1-->
@@ -797,7 +812,7 @@
         <item offset="109" id="11305" /> <!--Etoile Casaque-->
         <item offset="110" id="15038" /> <!--Etoile Bangles-->
         <item offset="111" id="16360" /> <!--Etoile Tights-->
-        <item offset="112" id="11396" /> <!--Etoile Shoes-->
+        <item offset="112" id="11396" /> <!--Etoile Toe Shoes-->
         <item offset="113" id="16248" /> <!--Etoile Cape-->
         <item offset="114" id="11480" /> <!--Argute M.board-->
         <item offset="115" id="11307" /> <!--Argute Gown-->
@@ -901,7 +916,7 @@
         <item offset="91" id="11306" /> <!--Etoile Casaque +1-->
         <item offset="92" id="15039" /> <!--Etoile Bangles +1-->
         <item offset="93" id="16361" /> <!--Etoile Tights +1-->
-        <item offset="94" id="11397" /> <!--Etoile Shoes +1-->
+        <item offset="94" id="11397" /> <!--Etoile Toe Shoes +1-->
         <item offset="95" id="11481" /> <!--Argute M.board +1-->
         <item offset="96" id="11308" /> <!--Argute Gown +1-->
         <item offset="97" id="15041" /> <!--Argute Bracers +1-->
@@ -1039,7 +1054,7 @@
         <item offset="127" id="12046" /> <!--Charis Casaque-->
         <item offset="128" id="12066" /> <!--Charis Bangles-->
         <item offset="129" id="12086" /> <!--Charis Tights-->
-        <item offset="130" id="12106" /> <!--Charis Toe shoes-->
+        <item offset="130" id="12106" /> <!--Charis Toe Shoes-->
         <item offset="131" id="11603" /> <!--Charis Necklace-->
         <item offset="132" id="19256" /> <!--Charis Feather-->
         <item offset="133" id="12027" /> <!--Savant's Bonnet-->
@@ -1165,7 +1180,7 @@
         <item offset="91" id="11202" /> <!--Charis Casaque +1-->
         <item offset="92" id="11222" /> <!--Charis Bangles +1-->
         <item offset="93" id="11242" /> <!--Charis Tights +1-->
-        <item offset="94" id="11262" /> <!--Charis Shoes +1-->
+        <item offset="94" id="11262" /> <!--Charis Toe Shoes +1-->
         <item offset="95" id="11183" /> <!--Svnt. Bonnet +1-->
         <item offset="96" id="11203" /> <!--Savant's Gown +1-->
         <item offset="97" id="11223" /> <!--Svnt. Bracers +1-->
@@ -1267,7 +1282,7 @@
         <item offset="91" id="11102" /> <!--Charis Casaque +2-->
         <item offset="92" id="11122" /> <!--Charis Bangles +2-->
         <item offset="93" id="11142" /> <!--Charis Tights +2-->
-        <item offset="94" id="11162" /> <!--Charis Shoes +2-->
+        <item offset="94" id="11162" /> <!--Charis Toe Shoes +2-->
         <item offset="95" id="11083" /> <!--Svnt. Bonnet +2-->
         <item offset="96" id="11103" /> <!--Savant's Gown +2-->
         <item offset="97" id="11123" /> <!--Svnt. Bracers +2-->
@@ -1480,7 +1495,7 @@
         <item offset="8" id="2041" /> <!--Mel. Hose -1-->
         <item offset="9" id="2042" /> <!--Mel. Gaiters -1-->
         <item offset="10" id="2043" /> <!--Clr. Cap -1-->
-        <item offset="11" id="2044" /> <!--Clr. Briault -1-->
+        <item offset="11" id="2044" /> <!--Clr. Bliaut -1-->
         <item offset="12" id="2045" /> <!--Clr. Mitts -1-->
         <item offset="13" id="2046" /> <!--Clr. Pantaln. -1-->
         <item offset="14" id="2047" /> <!--Clr. Duckbills -1-->
@@ -1563,7 +1578,7 @@
         <item offset="91" id="2719" /> <!--Etoile Casaque -1-->
         <item offset="92" id="2720" /> <!--Etoile Bangles -1-->
         <item offset="93" id="2721" /> <!--Etoile Tights -1-->
-        <item offset="94" id="2722" /> <!--Etoile Shoes -1-->
+        <item offset="94" id="2722" /> <!--Etoile Toe Shoes -1-->
         <item offset="95" id="2723" /> <!--Argute M.board -1-->
         <item offset="96" id="2724" /> <!--Argute Gown -1-->
         <item offset="97" id="2725" /> <!--Argute Bracers -1-->
@@ -1665,7 +1680,7 @@
         <item offset="91" id="10688" /> <!--Etoile Casaque +2-->
         <item offset="92" id="10708" /> <!--Etoile Bangles +2-->
         <item offset="93" id="10728" /> <!--Etoile Tights +2-->
-        <item offset="94" id="10748" /> <!--Etoile Shoes +2-->
+        <item offset="94" id="10748" /> <!--Etoile Toe Shoes +2-->
         <item offset="95" id="10669" /> <!--Argute M.board +2-->
         <item offset="96" id="10689" /> <!--Argute Gown +2-->
         <item offset="97" id="10709" /> <!--Argute Bracers +2-->
@@ -1894,12 +1909,12 @@
         <item offset="91" id="27825" /> <!--Maxixi Casaque-->
         <item offset="92" id="27961" /> <!--Maxixi Bangles-->
         <item offset="93" id="28108" /> <!--Maxixi Tights-->
-        <item offset="94" id="28241" /> <!--Maxixi Shoes-->
+        <item offset="94" id="28241" /> <!--Maxixi Toe Shoes-->
         <item offset="95" id="27682" /> <!--Maxixi Tiara-->
         <item offset="96" id="27826" /> <!--Maxixi Casaque-->
         <item offset="97" id="27962" /> <!--Maxixi Bangles-->
         <item offset="98" id="28109" /> <!--Maxixi Tights-->
-        <item offset="99" id="28242" /> <!--Maxixi Shoes-->
+        <item offset="99" id="28242" /> <!--Maxixi Toe Shoes-->
         <item offset="100" id="27683" /> <!--Acad. Mortarboard-->
         <item offset="101" id="27827" /> <!--Academic's Gown-->
         <item offset="102" id="27963" /> <!--Acad. Bracers-->
@@ -2001,12 +2016,12 @@
         <item offset="91" id="27846" /> <!--Maxixi Casaque +1-->
         <item offset="92" id="27982" /> <!--Maxixi Bangles +1-->
         <item offset="93" id="28129" /> <!--Maxixi Tights +1-->
-        <item offset="94" id="28262" /> <!--Maxixi Shoes +1-->
+        <item offset="94" id="28262" /> <!--Maxixi Toe Shoes +1-->
         <item offset="95" id="27703" /> <!--Maxixi Tiara +1-->
         <item offset="96" id="27847" /> <!--Maxixi Casaque +1-->
         <item offset="97" id="27983" /> <!--Maxixi Bangles +1-->
         <item offset="98" id="28130" /> <!--Maxixi Tights +1-->
-        <item offset="99" id="28263" /> <!--Maxixi Shoes +1-->
+        <item offset="99" id="28263" /> <!--Maxixi Toe Shoes +1-->
         <item offset="100" id="27704" /> <!--Acad. Mortar. +1-->
         <item offset="101" id="27848" /> <!--Acad. Gown +1-->
         <item offset="102" id="27984" /> <!--Acad. Bracers +1-->
@@ -2495,7 +2510,7 @@
         <item offset="50" id="26760" /> <!--Amini Gapette-->
         <item offset="51" id="26918" /> <!--Amini Caban-->
         <item offset="52" id="27072" /> <!--Amini Glovelettes-->
-        <item offset="53" id="27257" /> <!--Amini Brague-->
+        <item offset="53" id="27257" /> <!--Amini Bragues-->
         <item offset="54" id="27431" /> <!--Amini Bottillons-->
         <item offset="55" id="26762" /> <!--Kasuga Kabuto-->
         <item offset="56" id="26920" /> <!--Kasuga Domaru-->
@@ -2527,7 +2542,7 @@
         <item offset="82" id="27084" /> <!--Chasseur's Gants-->
         <item offset="83" id="27269" /> <!--Chas. Culottes-->
         <item offset="84" id="27443" /> <!--Chasseur's Bottes-->
-        <item offset="85" id="26774" /> <!--Karagoz Capello-->
+        <item offset="85" id="26774" /> <!--Karagoz Cappello-->
         <item offset="86" id="26932" /> <!--Karagoz Farsetto-->
         <item offset="87" id="27086" /> <!--Karagoz Guanti-->
         <item offset="88" id="27271" /> <!--Karagoz Pantaloni-->
@@ -2607,7 +2622,7 @@
         <item offset="50" id="26761" /> <!--Amini Gapette +1-->
         <item offset="51" id="26919" /> <!--Amini Caban +1-->
         <item offset="52" id="27073" /> <!--Amini Glove. +1-->
-        <item offset="53" id="27258" /> <!--Amini Brague +1-->
+        <item offset="53" id="27258" /> <!--Amini Bragues +1-->
         <item offset="54" id="27432" /> <!--Amini Bottillons +1-->
         <item offset="55" id="26763" /> <!--Kasuga Kabuto +1-->
         <item offset="56" id="26921" /> <!--Kasuga Domaru +1-->
@@ -2639,7 +2654,7 @@
         <item offset="82" id="27085" /> <!--Chasseur's Gants +1-->
         <item offset="83" id="27270" /> <!--Chas. Culottes +1-->
         <item offset="84" id="27444" /> <!--Chass. Bottes +1-->
-        <item offset="85" id="26775" /> <!--Karagoz Capello +1-->
+        <item offset="85" id="26775" /> <!--Kara. Cappello +1-->
         <item offset="86" id="26933" /> <!--Kara. Farsetto +1-->
         <item offset="87" id="27087" /> <!--Karagoz Guanti +1-->
         <item offset="88" id="27272" /> <!--Kara. Pantaloni +1-->
@@ -2648,7 +2663,7 @@
         <item offset="91" id="26935" /> <!--Macu. Casaque +1-->
         <item offset="92" id="27089" /> <!--Macu. Bangles +1-->
         <item offset="93" id="27274" /> <!--Maculele Tights +1-->
-        <item offset="94" id="27448" /> <!--Macu. Toe shoes +1-->
+        <item offset="94" id="27448" /> <!--Macu. Toe Shoes +1-->
         <item offset="95" id="26779" /> <!--Arbatel Bonnet +1-->
         <item offset="96" id="26937" /> <!--Arbatel Gown +1-->
         <item offset="97" id="27091" /> <!--Arbatel Bracers +1-->
@@ -2806,6 +2821,43 @@
         <item offset="138" id="21638" /> <!--Extinction-->
         <item offset="139" id="23800" /> <!--Cancrine Apron-->
         <item offset="140" id="23801" /> <!--Cancrine Apron +1-->
+        <item offset="141" id="3749" /> <!--Chemistry Set-->
+        <item offset="142" id="3750" /> <!--Qiqirn Sack-->
+        <item offset="143" id="22045" /> <!--Feline Hagoita-->
+        <item offset="144" id="22046" /> <!--Feline Hagoita +1-->
+        <item offset="145" id="3751" /> <!--Besigiled Table-->
+        <item offset="146" id="26490" /> <!--Ark Shield-->
+        <item offset="147" id="26546" /> <!--Moogle Shirt-->
+        <item offset="148" id="22047" /> <!--Korrigan Mallet-->
+        <item offset="149" id="22048" /> <!--Adenium Mallet-->
+        <item offset="150" id="22049" /> <!--Citrullus Mallet-->
+        <item offset="151" id="23803" /> <!--Poroggo Cassock-->
+        <item offset="152" id="23804" /> <!--Poroggo Cass. +1-->
+        <item offset="153" id="22051" /> <!--Lycopodium Mallet-->
+        <item offset="154" id="22052" /> <!--Summer Uchiwa-->
+        <item offset="155" id="3752" /> <!--Colibri Bed-->
+        <item offset="156" id="23805" /> <!--Morbol Apron-->
+        <item offset="157" id="25911" /> <!--Denim Pants-->
+        <item offset="158" id="25912" /> <!--Denim Pants +1-->
+        <item offset="159" id="3753" /> <!--Blueblade Fell-->
+        <item offset="160" id="23806" /> <!--Vaquero Hat-->
+        <item offset="161" id="3754" /> <!--Kagami Mochi-->
+        <item offset="162" id="23810" /> <!--Knit Cap-->
+        <item offset="163" id="23811" /> <!--Knit Cap +1-->
+        <item offset="164" id="3755" /> <!--Prismatic Chest-->
+        <item offset="165" id="26496" /> <!--Ageist-->
+        <item offset="166" id="26497" /> <!--Regis-->
+        <item offset="167" id="21786" /> <!--Poison Axe-->
+        <item offset="168" id="21787" /> <!--Poison Axe +1-->
+        <item offset="169" id="21996" /> <!--Magician's Rod-->
+        <item offset="170" id="21997" /> <!--Magician's Rod +1-->
+        <item offset="171" id="23802" /> <!--Aucuba Crown-->
+        <item offset="172" id="25777" /> <!--Iratsugo Happi-->
+        <item offset="173" id="25778" /> <!--Iratsume Happi-->
+        <item offset="174" id="21933" /> <!--Yagyu Shortblade-->
+        <item offset="175" id="21934" /> <!--Yagyu Short. +1-->
+        <item offset="176" id="21993" /> <!--Erudite's Staff-->
+        <item offset="177" id="21994" /> <!--Erudite's Staff +1-->
     </slip>
     <slip id="29334">
         <item offset="0" id="25659" /> <!--Sulevia's Mask-->
@@ -2918,7 +2970,7 @@
         <item offset="107" id="25829" /> <!--Meg. Gloves +2-->
         <item offset="108" id="25880" /> <!--Meg. Chausses +2-->
         <item offset="109" id="25947" /> <!--Meg. Jam. +2-->
-        <item offset="110" id="25576" /> <!--Hiza. Somen@+2-->
+        <item offset="110" id="25576" /> <!--Hiza. Somen +2-->
         <item offset="111" id="25792" /> <!--Hiza. Haramaki +2-->
         <item offset="112" id="25830" /> <!--Hizamaru Kote +2-->
         <item offset="113" id="25881" /> <!--Hiza. Hizayoroi +2-->
@@ -2983,6 +3035,8 @@
         <item offset="172" id="21759" /> <!--Autarch's Axe-->
         <item offset="173" id="21770" /> <!--Helgoland-->
         <item offset="174" id="22067" /> <!--Levin-->
+        <item offset="175" id="21680" /> <!--Goujian-->
+        <item offset="176" id="22071" /> <!--Profane Staff-->
     </slip>
     <slip id="29335">
         <item offset="0" id="23040" /> <!--Pummeler's Mask +2-->
@@ -3020,7 +3074,7 @@
         <item offset="32" id="23180" /> <!--Rev. Gauntlets +2-->
         <item offset="33" id="23247" /> <!--Rev. Breeches +2-->
         <item offset="34" id="23314" /> <!--Rev. Leggings +2-->
-        <item offset="35" id="23047" /> <!--Ig. Burgonet +2-->
+        <item offset="35" id="23047" /> <!--Ig. Burgeonet +2-->
         <item offset="36" id="23114" /> <!--Ignominy Cuirass +2-->
         <item offset="37" id="23181" /> <!--Ig. Gauntlets +2-->
         <item offset="38" id="23248" /> <!--Ig. Flanchard +2-->
@@ -3069,7 +3123,7 @@
         <item offset="81" id="23123" /> <!--Laksa. Frac +2-->
         <item offset="82" id="23190" /> <!--Laksa. Gants +2-->
         <item offset="83" id="23257" /> <!--Laksa. Trews +2-->
-        <item offset="84" id="23324" /> <!--Laksa. Bottes  +2-->
+        <item offset="84" id="23324" /> <!--Laksa. Bottes +2-->
         <item offset="85" id="23057" /> <!--Foire Taj +2-->
         <item offset="86" id="23124" /> <!--Foire Tobe +2-->
         <item offset="87" id="23191" /> <!--Foire Dastanas +2-->
@@ -3096,10 +3150,10 @@
         <item offset="108" id="23262" /> <!--Geomancy Pants +2-->
         <item offset="109" id="23329" /> <!--Geo. Sandals +2-->
         <item offset="110" id="23062" /> <!--Rune. Bandeau +2-->
-        <item offset="111" id="23129" /> <!--Runeist's Coat +2-->
-        <item offset="112" id="23196" /> <!--Runeist's Mitons +2-->
+        <item offset="111" id="23129" /> <!--Runeist Coat +2-->
+        <item offset="112" id="23196" /> <!--Runeist Mitons +2-->
         <item offset="113" id="23263" /> <!--Rune. Trousers +2-->
-        <item offset="114" id="23330" /> <!--Runeist's Boots +2-->
+        <item offset="114" id="23330" /> <!--Runeist Bottes +2-->
     </slip>
     <slip id="29336">
         <item offset="0" id="23375" /> <!--Pummeler's Mask +3-->
@@ -3137,7 +3191,7 @@
         <item offset="32" id="23515" /> <!--Rev. Gauntlets +3-->
         <item offset="33" id="23582" /> <!--Rev. Breeches +3-->
         <item offset="34" id="23649" /> <!--Rev. Leggings +3-->
-        <item offset="35" id="23382" /> <!--Ig. Burgonet +3-->
+        <item offset="35" id="23382" /> <!--Ig. Burgeonet +3-->
         <item offset="36" id="23449" /> <!--Ignominy Cuirass +3-->
         <item offset="37" id="23516" /> <!--Ig. Gauntlets +3-->
         <item offset="38" id="23583" /> <!--Ig. Flanchard +3-->
@@ -3213,10 +3267,10 @@
         <item offset="108" id="23597" /> <!--Geomancy Pants +3-->
         <item offset="109" id="23664" /> <!--Geo. Sandals +3-->
         <item offset="110" id="23397" /> <!--Rune. Bandeau +3-->
-        <item offset="111" id="23464" /> <!--Runeist's Coat +3-->
-        <item offset="112" id="23531" /> <!--Runeist's Mitons +3-->
+        <item offset="111" id="23464" /> <!--Runeist Coat +3-->
+        <item offset="112" id="23531" /> <!--Runeist Mitons +3-->
         <item offset="113" id="23598" /> <!--Rune. Trousers +3-->
-        <item offset="114" id="23665" /> <!--Runeist's Boots +3-->
+        <item offset="114" id="23665" /> <!--Runeist Bottes +3-->
     </slip>
     <slip id="29337">
         <item offset="0" id="23063" /> <!--Agoge Mask +2-->
@@ -3514,5 +3568,246 @@
         <item offset="68" id="22107" /> <!--Ullr-->
         <item offset="69" id="22218" /> <!--Khonsu-->
         <item offset="70" id="22089" /> <!--Sophistry-->
+    </slip>
+    <slip id="29340">
+        <item offset="0" id="23085" /> <!--Boii Mask +2-->
+        <item offset="1" id="23152" /> <!--Boii Lorica +2-->
+        <item offset="2" id="23219" /> <!--Boii Mufflers +2-->
+        <item offset="3" id="23286" /> <!--Boii Cuisses +2-->
+        <item offset="4" id="23353" /> <!--Boii Calligae +2-->
+        <item offset="5" id="23086" /> <!--Bhikku Crown +2-->
+        <item offset="6" id="23153" /> <!--Bhikku Cyclas +2-->
+        <item offset="7" id="23220" /> <!--Bhikku Gloves +2-->
+        <item offset="8" id="23287" /> <!--Bhikku Hose +2-->
+        <item offset="9" id="23354" /> <!--Bhikku Gaiters +2-->
+        <item offset="10" id="23087" /> <!--Ebers Cap +2-->
+        <item offset="11" id="23154" /> <!--Ebers Bliaut +2-->
+        <item offset="12" id="23221" /> <!--Ebers Mitts +2-->
+        <item offset="13" id="23288" /> <!--Ebers Pant. +2-->
+        <item offset="14" id="23355" /> <!--Ebers Duckbills +2-->
+        <item offset="15" id="23088" /> <!--Wicce Petasos +2-->
+        <item offset="16" id="23155" /> <!--Wicce Coat +2-->
+        <item offset="17" id="23222" /> <!--Wicce Gloves +2-->
+        <item offset="18" id="23289" /> <!--Wicce Chausses +2-->
+        <item offset="19" id="23356" /> <!--Wicce Sabots +2-->
+        <item offset="20" id="23089" /> <!--Leth. Chappel +2-->
+        <item offset="21" id="23156" /> <!--Lethargy Sayon +2-->
+        <item offset="22" id="23223" /> <!--Leth. Ganth. +2-->
+        <item offset="23" id="23290" /> <!--Leth. Fuseau +2-->
+        <item offset="24" id="23357" /> <!--Leth. Houseaux +2-->
+        <item offset="25" id="23090" /> <!--Skulker's Bonnet +2-->
+        <item offset="26" id="23157" /> <!--Skulker's Vest +2-->
+        <item offset="27" id="23224" /> <!--Skulk. Armlets +2-->
+        <item offset="28" id="23291" /> <!--Skulk. Culottes +2-->
+        <item offset="29" id="23358" /> <!--Skulk. Poulaines +2-->
+        <item offset="30" id="23091" /> <!--Chev. Armet +2-->
+        <item offset="31" id="23158" /> <!--Chev. Cuirass +2-->
+        <item offset="32" id="23225" /> <!--Chev. Gauntlets +2-->
+        <item offset="33" id="23292" /> <!--Chev. Cuisses +2-->
+        <item offset="34" id="23359" /> <!--Chev. Sabatons +2-->
+        <item offset="35" id="23092" /> <!--Heath. Burgeon. +2-->
+        <item offset="36" id="23159" /> <!--Heath. Cuirass +2-->
+        <item offset="37" id="23226" /> <!--Heath. Gauntlets +2-->
+        <item offset="38" id="23293" /> <!--Heath. Flanchard +2-->
+        <item offset="39" id="23360" /> <!--Heath. Sollerets +2-->
+        <item offset="40" id="23093" /> <!--Nuk. Cabasset +2-->
+        <item offset="41" id="23160" /> <!--Nukumi Gausape +2-->
+        <item offset="42" id="23227" /> <!--Nukumi Manoplas +2-->
+        <item offset="43" id="23294" /> <!--Nukumi Quijotes +2-->
+        <item offset="44" id="23361" /> <!--Nukumi Ocreae +2-->
+        <item offset="45" id="23094" /> <!--Fili Calot +2-->
+        <item offset="46" id="23161" /> <!--Fili Hongreline +2-->
+        <item offset="47" id="23228" /> <!--Fili Manchettes +2-->
+        <item offset="48" id="23295" /> <!--Fili Rhingrave +2-->
+        <item offset="49" id="23362" /> <!--Fili Cothurnes +2-->
+        <item offset="50" id="23095" /> <!--Amini Gapette +2-->
+        <item offset="51" id="23162" /> <!--Amini Caban +2-->
+        <item offset="52" id="23229" /> <!--Amini Glove. +2-->
+        <item offset="53" id="23296" /> <!--Amini Bragues +2-->
+        <item offset="54" id="23363" /> <!--Amini Bottillons +2-->
+        <item offset="55" id="23096" /> <!--Kasuga Kabuto +2-->
+        <item offset="56" id="23163" /> <!--Kasuga Domaru +2-->
+        <item offset="57" id="23230" /> <!--Kasuga Kote +2-->
+        <item offset="58" id="23297" /> <!--Kasuga Haidate +2-->
+        <item offset="59" id="23364" /> <!--Kas. Sune-Ate +2-->
+        <item offset="60" id="23097" /> <!--Hattori Zukin +2-->
+        <item offset="61" id="23164" /> <!--Hattori Ningi +2-->
+        <item offset="62" id="23231" /> <!--Hattori Tekko +2-->
+        <item offset="63" id="23298" /> <!--Hattori Hakama +2-->
+        <item offset="64" id="23365" /> <!--Hattori Kyahan +2-->
+        <item offset="65" id="23098" /> <!--Peltast's Mezail +2-->
+        <item offset="66" id="23165" /> <!--Pelt. Plackart +2-->
+        <item offset="67" id="23232" /> <!--Pel. Vambraces +2-->
+        <item offset="68" id="23299" /> <!--Pelt. Cuissots +2-->
+        <item offset="69" id="23366" /> <!--Pelt. Schyn. +2-->
+        <item offset="70" id="23099" /> <!--Beckoner's Horn +2-->
+        <item offset="71" id="23166" /> <!--Beck. Doublet +2-->
+        <item offset="72" id="23233" /> <!--Beck. Bracers +2-->
+        <item offset="73" id="23300" /> <!--Beck. Spats +2-->
+        <item offset="74" id="23367" /> <!--Beck. Pigaches +2-->
+        <item offset="75" id="23100" /> <!--Hashishin Kavuk +2-->
+        <item offset="76" id="23167" /> <!--Hashishin Mintan +2-->
+        <item offset="77" id="23234" /> <!--Hashi. Bazu. +2-->
+        <item offset="78" id="23301" /> <!--Hashishin Tayt +2-->
+        <item offset="79" id="23368" /> <!--Hashi. Basmak +2-->
+        <item offset="80" id="23101" /> <!--Chass. Tricorne +2-->
+        <item offset="81" id="23168" /> <!--Chasseur's Frac +2-->
+        <item offset="82" id="23235" /> <!--Chasseur's Gants +2-->
+        <item offset="83" id="23302" /> <!--Chas. Culottes +2-->
+        <item offset="84" id="23369" /> <!--Chass. Bottes +2-->
+        <item offset="85" id="23102" /> <!--Kara. Cappello +2-->
+        <item offset="86" id="23169" /> <!--Kara. Farsetto +2-->
+        <item offset="87" id="23236" /> <!--Karagoz Guanti +2-->
+        <item offset="88" id="23303" /> <!--Kara. Pantaloni +2-->
+        <item offset="89" id="23370" /> <!--Karagoz Scarpe +2-->
+        <item offset="90" id="23103" /> <!--Maculele Tiara +2-->
+        <item offset="91" id="23170" /> <!--Macu. Casaque +2-->
+        <item offset="92" id="23237" /> <!--Macu. Bangles +2-->
+        <item offset="93" id="23304" /> <!--Maculele Tights +2-->
+        <item offset="94" id="23371" /> <!--Macu. Toe Sh. +2-->
+        <item offset="95" id="23104" /> <!--Arbatel Bonnet +2-->
+        <item offset="96" id="23171" /> <!--Arbatel Gown +2-->
+        <item offset="97" id="23238" /> <!--Arbatel Bracers +2-->
+        <item offset="98" id="23305" /> <!--Arbatel Pants +2-->
+        <item offset="99" id="23372" /> <!--Arbatel Loafers +2-->
+        <item offset="100" id="23105" /> <!--Azimuth Hood +2-->
+        <item offset="101" id="23172" /> <!--Azimuth Coat +2-->
+        <item offset="102" id="23239" /> <!--Azimuth Gloves +2-->
+        <item offset="103" id="23306" /> <!--Azimuth Tights +2-->
+        <item offset="104" id="23373" /> <!--Azimuth Gaiters +2-->
+        <item offset="105" id="23106" /> <!--Erilaz Galea +2-->
+        <item offset="106" id="23173" /> <!--Erilaz Surcoat +2-->
+        <item offset="107" id="23240" /> <!--Erilaz Gauntlets +2-->
+        <item offset="108" id="23307" /> <!--Eri. Leg Guards +2-->
+        <item offset="109" id="23374" /> <!--Erilaz Greaves +2-->
+    </slip>
+    <slip id="29341">
+        <item offset="0" id="23420" /> <!--Boii Mask +3-->
+        <item offset="1" id="23487" /> <!--Boii Lorica +3-->
+        <item offset="2" id="23554" /> <!--Boii Mufflers +3-->
+        <item offset="3" id="23621" /> <!--Boii Cuisses +3-->
+        <item offset="4" id="23688" /> <!--Boii Calligae +3-->
+        <item offset="5" id="23421" /> <!--Bhikku Crown +3-->
+        <item offset="6" id="23488" /> <!--Bhikku Cyclas +3-->
+        <item offset="7" id="23555" /> <!--Bhikku Gloves +3-->
+        <item offset="8" id="23622" /> <!--Bhikku Hose +3-->
+        <item offset="9" id="23689" /> <!--Bhikku Gaiters +3-->
+        <item offset="10" id="23422" /> <!--Ebers Cap +3-->
+        <item offset="11" id="23489" /> <!--Ebers Bliaut +3-->
+        <item offset="12" id="23556" /> <!--Ebers Mitts +3-->
+        <item offset="13" id="23623" /> <!--Ebers Pant. +3-->
+        <item offset="14" id="23690" /> <!--Ebers Duckbills +3-->
+        <item offset="15" id="23423" /> <!--Wicce Petasos +3-->
+        <item offset="16" id="23490" /> <!--Wicce Coat +3-->
+        <item offset="17" id="23557" /> <!--Wicce Gloves +3-->
+        <item offset="18" id="23624" /> <!--Wicce Chausses +3-->
+        <item offset="19" id="23691" /> <!--Wicce Sabots +3-->
+        <item offset="20" id="23424" /> <!--Leth. Chappel +3-->
+        <item offset="21" id="23491" /> <!--Lethargy Sayon +3-->
+        <item offset="22" id="23558" /> <!--Leth. Ganth. +3-->
+        <item offset="23" id="23625" /> <!--Leth. Fuseau +3-->
+        <item offset="24" id="23692" /> <!--Leth. Houseaux +3-->
+        <item offset="25" id="23425" /> <!--Skulker's Bonnet +3-->
+        <item offset="26" id="23492" /> <!--Skulker's Vest +3-->
+        <item offset="27" id="23559" /> <!--Skulk. Armlets +3-->
+        <item offset="28" id="23626" /> <!--Skulk. Culottes +3-->
+        <item offset="29" id="23693" /> <!--Skulk. Poulaines +3-->
+        <item offset="30" id="23426" /> <!--Chev. Armet +3-->
+        <item offset="31" id="23493" /> <!--Chev. Cuirass +3-->
+        <item offset="32" id="23560" /> <!--Chev. Gauntlets +3-->
+        <item offset="33" id="23627" /> <!--Chev. Cuisses +3-->
+        <item offset="34" id="23694" /> <!--Chev. Sabatons +3-->
+        <item offset="35" id="23427" /> <!--Heath. Bur. +3-->
+        <item offset="36" id="23494" /> <!--Heath. Cuirass +3-->
+        <item offset="37" id="23561" /> <!--Heath. Gauntlets +3-->
+        <item offset="38" id="23628" /> <!--Heath. Flanchard +3-->
+        <item offset="39" id="23695" /> <!--Heath. Sollerets +3-->
+        <item offset="40" id="23428" /> <!--Nuk. Cabasset +3-->
+        <item offset="41" id="23495" /> <!--Nukumi Gausape +3-->
+        <item offset="42" id="23562" /> <!--Nukumi Manoplas +3-->
+        <item offset="43" id="23629" /> <!--Nukumi Quijotes +3-->
+        <item offset="44" id="23696" /> <!--Nukumi Ocreae +3-->
+        <item offset="45" id="23429" /> <!--Fili Calot +3-->
+        <item offset="46" id="23496" /> <!--Fili Hongreline +3-->
+        <item offset="47" id="23563" /> <!--Fili Manchettes +3-->
+        <item offset="48" id="23630" /> <!--Fili Rhingrave +3-->
+        <item offset="49" id="23697" /> <!--Fili Cothurnes +3-->
+        <item offset="50" id="23430" /> <!--Amini Gapette +3-->
+        <item offset="51" id="23497" /> <!--Amini Caban +3-->
+        <item offset="52" id="23564" /> <!--Amini Glove. +3-->
+        <item offset="53" id="23631" /> <!--Amini Bragues +3-->
+        <item offset="54" id="23698" /> <!--Amini Bottillons +3-->
+        <item offset="55" id="23431" /> <!--Kasuga Kabuto +3-->
+        <item offset="56" id="23498" /> <!--Kasuga Domaru +3-->
+        <item offset="57" id="23565" /> <!--Kasuga Kote +3-->
+        <item offset="58" id="23632" /> <!--Kasuga Haidate +3-->
+        <item offset="59" id="23699" /> <!--Kas. Sune-Ate +3-->
+        <item offset="60" id="23432" /> <!--Hattori Zukin +3-->
+        <item offset="61" id="23499" /> <!--Hattori Ningi +3-->
+        <item offset="62" id="23566" /> <!--Hattori Tekko +3-->
+        <item offset="63" id="23633" /> <!--Hattori Hakama +3-->
+        <item offset="64" id="23700" /> <!--Hattori Kyahan +3-->
+        <item offset="65" id="23433" /> <!--Peltast's Mezail +3-->
+        <item offset="66" id="23500" /> <!--Pelt. Plackart +3-->
+        <item offset="67" id="23567" /> <!--Pel. Vambraces +3-->
+        <item offset="68" id="23634" /> <!--Pelt. Cuissots +3-->
+        <item offset="69" id="23701" /> <!--Pelt. Schyn. +3-->
+        <item offset="70" id="23434" /> <!--Beckoner's Horn +3-->
+        <item offset="71" id="23501" /> <!--Beck. Doublet +3-->
+        <item offset="72" id="23568" /> <!--Beck. Bracers +3-->
+        <item offset="73" id="23635" /> <!--Beck. Spats +3-->
+        <item offset="74" id="23702" /> <!--Beck. Pigaches +3-->
+        <item offset="75" id="23435" /> <!--Hashishin Kavuk +3-->
+        <item offset="76" id="23502" /> <!--Hashishin Mintan +3-->
+        <item offset="77" id="23569" /> <!--Hashi. Bazu. +3-->
+        <item offset="78" id="23636" /> <!--Hashishin Tayt +3-->
+        <item offset="79" id="23703" /> <!--Hashi. Basmak +3-->
+        <item offset="80" id="23436" /> <!--Chass. Tricorne +3-->
+        <item offset="81" id="23503" /> <!--Chasseur's Frac +3-->
+        <item offset="82" id="23570" /> <!--Chasseur's Gants +3-->
+        <item offset="83" id="23637" /> <!--Chas. Culottes +3-->
+        <item offset="84" id="23704" /> <!--Chass. Bottes +3-->
+        <item offset="85" id="23437" /> <!--Kara. Cappello +3-->
+        <item offset="86" id="23504" /> <!--Kara. Farsetto +3-->
+        <item offset="87" id="23571" /> <!--Karagoz Guanti +3-->
+        <item offset="88" id="23638" /> <!--Kara. Pantaloni +3-->
+        <item offset="89" id="23705" /> <!--Karagoz Scarpe +3-->
+        <item offset="90" id="23438" /> <!--Maculele Tiara +3-->
+        <item offset="91" id="23505" /> <!--Macu. Casaque +3-->
+        <item offset="92" id="23572" /> <!--Macu. Bangles +3-->
+        <item offset="93" id="23639" /> <!--Maculele Tights +3-->
+        <item offset="94" id="23706" /> <!--Macu. Toe Sh. +3-->
+        <item offset="95" id="23439" /> <!--Arbatel Bonnet +3-->
+        <item offset="96" id="23506" /> <!--Arbatel Gown +3-->
+        <item offset="97" id="23573" /> <!--Arbatel Bracers +3-->
+        <item offset="98" id="23640" /> <!--Arbatel Pants +3-->
+        <item offset="99" id="23707" /> <!--Arbatel Loafers +3-->
+        <item offset="100" id="23440" /> <!--Azimuth Hood +3-->
+        <item offset="101" id="23507" /> <!--Azimuth Coat +3-->
+        <item offset="102" id="23574" /> <!--Azimuth Gloves +3-->
+        <item offset="103" id="23641" /> <!--Azimuth Tights +3-->
+        <item offset="104" id="23708" /> <!--Azimuth Gaiters +3-->
+        <item offset="105" id="23441" /> <!--Erilaz Galea +3-->
+        <item offset="106" id="23508" /> <!--Erilaz Surcoat +3-->
+        <item offset="107" id="23575" /> <!--Erilaz Gauntlets +3-->
+        <item offset="108" id="23642" /> <!--Eri. Leg Guards +3-->
+        <item offset="109" id="23709" /> <!--Erilaz Greaves +3-->
+    </slip>
+    <slip id="29342">
+        <item offset="0" id="23812" /> <!--Sapphire Mask-->
+        <item offset="1" id="23813" /> <!--Sapphire Platemail-->
+        <item offset="2" id="23814" /> <!--Sapphire Gauntlets-->
+        <item offset="3" id="23815" /> <!--Sapphire Trousers-->
+        <item offset="4" id="23816" /> <!--Sapphire Leggings-->
+        <item offset="5" id="23817" /> <!--Jadeite Visor-->
+        <item offset="6" id="23818" /> <!--Jadeite Cuirie-->
+        <item offset="7" id="23819" /> <!--Jadeite Gloves-->
+        <item offset="8" id="23820" /> <!--Jadeite Chausses-->
+        <item offset="9" id="23821" /> <!--Jadeite Jambeaux-->
+        <item offset="10" id="23832" /> <!--Ruby Coronal-->
+        <item offset="11" id="23833" /> <!--Ruby Robe-->
+        <item offset="12" id="23834" /> <!--Ruby Cuffs-->
+        <item offset="13" id="23835" /> <!--Ruby Slops-->
+        <item offset="14" id="23836" /> <!--Ruby Pigaches-->
     </slip>
 </slips>
