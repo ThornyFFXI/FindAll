@@ -4,10 +4,11 @@ But, this is still a use-at-your-own-risk situation, if you choose to enable it 
 Further, much like bellhop, you should absolutely not use this feature after a maintenance until it is verified that Ashita structures have not broken in any way.
 
 # Installation
+Do not download the entire repository as a zip unless you plan to compile the plugin yourself. That will not provide the files you need.<br>
+
 1. Download the plugin release zip that matches your ashita installation's interface version from the releases area on the right side.
 2. Extract the entire zip to your ashita folder(the folder containing ashita.dll and ashita-cli.exe). Everything will fall into place.
 3. Load with '/load findall' or add the same line to your startup script. Findall is a plugin not an addon, so do not use '/addon load'.
-Do not download the entire repository as a zip unless you plan to compile the plugin yourself. That will not provide the files you need.
 
 # Summary
 FindAll is a plugin that provides inventory cacheing.<br>
