@@ -4,7 +4,7 @@
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
 #endif 
-#include "C:\Ashita 4\plugins\sdk\Ashita.h"
+#include "C:\Users\Garre\FFXI\Ashita 4\plugins\sdk\Ashita.h"
 #include "FindAllConfig.h"
 
 //0x1D

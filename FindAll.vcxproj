@@ -102,7 +102,7 @@
       <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy "Debug\$(ProjectName)_debug.dll" "C:\Ashita 4\plugins\$(ProjectName)_debug.dll"</Command>
+      <Command>copy "Debug\$(ProjectName)_debug.dll" "C:\Users\Garre\FFXI\Ashita 4\plugins\$(ProjectName)_debug.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -130,7 +130,7 @@
 if not exist "build\plugins" mkdir "build\plugins"
 if exist "build\$(ProjectName).zip" del "build\$(ProjectName).zip"
 copy "Release\$(ProjectName).dll" "$(SolutionDir)build\plugins\$(ProjectName).dll"
-xcopy "$(SolutionDir)build\*" "C:\Ashita 4\" /i /e /Y
+xcopy "$(SolutionDir)build\*" "C:\Users\Garre\FFXI\Ashita 4\" /i /e /Y
 cd build
 "C:\Program Files\7-Zip\7z.exe" a $(ProjectName).zip * -x!*.zip</Command>
     </PostBuildEvent>
