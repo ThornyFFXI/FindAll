@@ -66,7 +66,7 @@ struct CharacterIdentifier_t
     char Name[16];
     uint32_t Id;
 
-    bool operator==(const CharacterIdentifier_t& other)
+    bool operator==(const CharacterIdentifier_t other)
     {
         return ((strcmp(Name, other.Name) == 0) && (Id == other.Id));
     }

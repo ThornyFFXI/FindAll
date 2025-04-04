@@ -2,10 +2,21 @@
 
 uint32_t FindAll::ThreadEntry()
 {
+    bool canBroaden = false;
     std::vector<SearchItem_t> items;
     for (auto iter = mPending.Terms.begin(); iter != mPending.Terms.end(); iter++)
     {
         auto vector = GetMatchingItems(iter->c_str());
+        if (strstr(iter->c_str(), "*") == 0)
+        {
+            if (vector.size() == 0)
+            {
+                *iter  = "*" + *iter + "*";
+                vector = GetMatchingItems(iter->c_str());
+            }
+            else
+                canBroaden = true;
+        }
         items.insert(items.end(), vector.begin(), vector.end());
     }
     if (items.size() == 0)
@@ -22,13 +33,33 @@ uint32_t FindAll::ThreadEntry()
         InterlockedExchange(&mPending.State, (uint32_t)SearchState::Idle);
         return 0;
     }
-    for (std::vector<QueriableCache*>::iterator iCache = mPending.Caches.begin(); iCache != mPending.Caches.end(); iCache = mPending.Caches.erase(iCache))
+    for (std::vector<QueriableCache*>::iterator iCache = mPending.Caches.begin(); iCache != mPending.Caches.end(); iCache++)
     {
         std::vector<SearchResult_t> temp = QueryCache(items, *iCache);
         mPending.Results.insert(mPending.Results.end(), temp.begin(), temp.end());
-        delete *iCache;
     }
 
+    if ((canBroaden) && (mPending.Results.size() == 0))
+    {
+        // Retry with forced wildcards..
+        items.clear();
+        for (auto iter = mPending.Terms.begin(); iter != mPending.Terms.end(); iter++)
+        {
+            auto vector = GetMatchingItems(iter->c_str());
+            if (strstr(iter->c_str(), "*") == 0)
+            {
+                *iter  = "*" + *iter + "*";
+                vector = GetMatchingItems(iter->c_str());
+            }
+            items.insert(items.end(), vector.begin(), vector.end());
+        }
+
+        for (std::vector<QueriableCache*>::iterator iCache = mPending.Caches.begin(); iCache != mPending.Caches.end(); iCache++)
+        {
+            std::vector<SearchResult_t> temp = QueryCache(items, *iCache);
+            mPending.Results.insert(mPending.Results.end(), temp.begin(), temp.end());
+        }
+    }
     if (mPending.Results.size() > 0)
     {
         mPending.pSearch = new SearchInstance(mPending.Results, mPending.Terms, mConfig.GetDisplayMax());
@@ -36,6 +67,10 @@ uint32_t FindAll::ThreadEntry()
     else
     {
         mPending.pSearch = nullptr;
+    }
+    for (std::vector<QueriableCache*>::iterator iCache = mPending.Caches.begin(); iCache != mPending.Caches.end(); iCache = mPending.Caches.erase(iCache))
+    {
+        delete *iCache;
     }
 
     InterlockedExchange(&mPending.State, (uint32_t)SearchState::Complete);
@@ -272,29 +307,6 @@ std::vector<SearchItem_t> FindAll::GetMatchingItems(const char* term)
                 else if ((pResource->LogNameSingular[0]) && (_stricmp(term, pResource->LogNameSingular[0]) == 0))
                 {
                     matchIds.push_back(CreateSearchItem(x));
-                }
-            }
-        }
-
-        //revert to wildcard match if no exact item match..
-        if (matchIds.size() == matchCount)
-        {
-            char wcBuffer[256];
-            sprintf_s(wcBuffer, 256, "*%s*", term);
-
-            for (int x = 0; x < 65536; x++)
-            {
-                IItem* pResource = m_AshitaCore->GetResourceManager()->GetItemById(x);
-                if (pResource)
-                {
-                    if ((pResource->Name[0]) && (CheckWildcardMatch(wcBuffer, pResource->Name[0])))
-                    {
-                        matchIds.push_back(CreateSearchItem(x));
-                    }
-                    else if ((pResource->LogNameSingular[0]) && (CheckWildcardMatch(wcBuffer, pResource->LogNameSingular[0])))
-                    {
-                        matchIds.push_back(CreateSearchItem(x));
-                    }
                 }
             }
         }
