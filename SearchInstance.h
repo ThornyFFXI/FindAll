@@ -5,7 +5,7 @@
 #pragma once
 #endif
 
-#include "C:\Users\Garre\FFXI\Ashita 4\plugins\sdk\Ashita.h"
+#include "Ashita.h"
 #include "InventoryCache.h"
 
 struct ItemInfo_t
