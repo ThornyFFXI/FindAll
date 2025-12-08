@@ -1,4 +1,5 @@
 LIBRARY "FindAll"
 EXPORTS
 	expCreatePlugin
+	expDestroyPlugin
 	expGetInterfaceVersion

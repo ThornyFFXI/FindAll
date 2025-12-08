@@ -8,6 +8,11 @@ __declspec(dllexport) IPlugin* __stdcall expCreatePlugin(const char* args)
     return (IPlugin*)(new FindAll());
 }
 
+__declspec(dllexport) void __stdcall expDestroyPlugin(void* instance)
+{
+    delete static_cast<FindAll*>(instance);
+}
+
 __declspec(dllexport) double __stdcall expGetInterfaceVersion(void)
 {
     return ASHITA_INTERFACE_VERSION;
