@@ -3860,6 +3860,27 @@
 		<item offset="49" id="23894" />	<!--Prishe's Boots-->
 		<item offset="50" id="24271" />	<!--Prishe's Boots +1-->
 		<item offset="51" id="22003" />	<!--Arthro's Scepter-->
+		<item offset="52" id="25674" />	<!--Ilm Tiara-->
+		<item offset="53" id="26521" />	<!--Ilm Weskit-->
+		<item offset="54" id="25814" />	<!--Ilm Manillas-->
+		<item offset="55" id="25857" />	<!--Ilm Lappas-->
+		<item offset="56" id="25939" />	<!--Ilm Huaraches-->
+		<item offset="57" id="21520" />	<!--Ethereal Fists-->
+		<item offset="58" id="21571" />	<!--Ethereal Dagger-->
+		<item offset="59" id="21624" />	<!--Ethereal Sword-->
+		<item offset="60" id="21666" />	<!--Ethereal G. Sword-->
+		<item offset="61" id="21713" />	<!--Ethereal Axe-->
+		<item offset="62" id="21771" />	<!--Ethereal Great Axe-->
+		<item offset="63" id="21838" />	<!--Ethereal Scythe-->
+		<item offset="64" id="21873" />	<!--Ethereal Spear-->
+		<item offset="65" id="21911" />	<!--Ethereal Katana-->
+		<item offset="66" id="21962" />	<!--Ethereal Tachi-->
+		<item offset="67" id="22053" />	<!--Ethereal Club-->
+		<item offset="68" id="22090" />	<!--Ethereal Staff-->
+		<item offset="69" id="22146" />	<!--Ethereal Bow-->
+		<item offset="70" id="22165" />	<!--Ethereal Gun-->
+		<item offset="71" id="20655" />	<!--Archduke's Sword-->
+		<item offset="72" id="26417" />	<!--Archduke's Shield-->
 	</slip>
 	<slip id="29343">		<!--Storage Slip 32-->
 		<item offset="0" id="23895" />	<!--Pumm. Mask +4-->
@@ -3894,7 +3915,7 @@
 		<item offset="29" id="24080" />	<!--Pill. Poulaines +4-->
 		<item offset="30" id="23901" />	<!--Rev. Coronet +4-->
 		<item offset="31" id="23946" />	<!--Rev. Surcoat +4-->
-		<item offset="32" id="23991" />	<!--Rav. Gauntlets +4-->
+		<item offset="32" id="23991" />	<!--Rev. Gauntlets +4-->
 		<item offset="33" id="24036" />	<!--Rev. Breeches +4-->
 		<item offset="34" id="24081" />	<!--Rev. Leggings +4-->
 		<item offset="35" id="23902" />	<!--Ig. Burgeonet +4-->
