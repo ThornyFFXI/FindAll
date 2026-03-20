@@ -105,7 +105,6 @@ public:
 private:
     void ClearCache(Ashita::FFXI::items_t* cache);
     void FlushCacheToMemory();
-    void CreateDirectories(const char* fileName);
     void QueueWrite();
     bool TryWriteFile();
 };

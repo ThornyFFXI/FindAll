@@ -1,5 +1,6 @@
 #include "InventoryCache.h"
 #include <fstream>
+#include <filesystem>
 
 InventoryCache::InventoryCache(IAshitaCore* pAshitaCore, FindAllConfig* pConfig)
     : pAshitaCore(pAshitaCore)
@@ -257,23 +258,6 @@ void InventoryCache::FlushCacheToMemory()
         pInventory++;
     }
 }
-void InventoryCache::CreateDirectories(const char* fileName)
-{
-    //Ensure directories exist, making them if not.
-    std::string makeDirectory(fileName);
-    size_t nextDirectory = makeDirectory.find("\\");
-    nextDirectory        = makeDirectory.find("\\", nextDirectory + 1);
-    while (nextDirectory != std::string::npos)
-    {
-        std::string currentDirectory = makeDirectory.substr(0, nextDirectory + 1);
-        if ((!CreateDirectory(currentDirectory.c_str(), NULL)) && (ERROR_ALREADY_EXISTS != GetLastError()))
-        {
-            OutputHelper::Outputf(Ashita::LogLevel::Error, "Failed to create directory: $H%s$R", currentDirectory.c_str());
-            return;
-        }
-        nextDirectory = makeDirectory.find("\\", nextDirectory + 1);
-    }
-}
 void InventoryCache::QueueWrite()
 {
     mWritesPending = true;
@@ -281,7 +265,8 @@ void InventoryCache::QueueWrite()
 }
 bool InventoryCache::TryWriteFile()
 {
-    CreateDirectories(mFilePath);
+    std::filesystem::path path(mFilePath);
+    std::filesystem::create_directories(path.parent_path());
     std::ofstream writer(mFilePath, std::ios::out | std::ios::binary);
     if (!writer.is_open())
         return false;

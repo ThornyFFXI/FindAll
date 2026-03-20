@@ -120,7 +120,8 @@ public:
     }
     void LoadSettings()
     {
-        CreateDirectories();
+        std::filesystem::path configDirectory(string(pAshitaCore->GetInstallPath()) + "config\\plugins\\" + std::string(pConfig->GetPluginName()) + "\\default.xml");
+        std::filesystem::create_directories(configDirectory.parent_path());
         Reset(true);
         char defaultBuffer[256];
         sprintf_s(defaultBuffer, 256, "%sconfig\\plugins\\%s\\default.xml", pAshitaCore->GetInstallPath(), pConfig->GetPluginName());
@@ -174,26 +175,6 @@ public:
     }
 
 private:
-    void CreateDirectories()
-    {
-        string makeDirectory = string(pAshitaCore->GetInstallPath()) + "config\\plugins\\" + std::string(pConfig->GetPluginName()) + "\\";
-        if (std::filesystem::exists(makeDirectory))
-            return;
-
-        size_t nextDirectory = makeDirectory.find("\\");
-        nextDirectory        = makeDirectory.find("\\", nextDirectory + 1);
-        while (nextDirectory != string::npos)
-        {
-            string currentDirectory = makeDirectory.substr(0, nextDirectory + 1);
-            if ((!CreateDirectory(currentDirectory.c_str(), NULL)) && (ERROR_ALREADY_EXISTS != GetLastError()))
-            {
-                OutputHelper::Outputf(Ashita::LogLevel::Error, "Could not find or create folder: $H%s$R", currentDirectory.c_str());
-                return;
-            }
-            nextDirectory = makeDirectory.find("\\", nextDirectory + 1);
-        }
-    }
-
     void Reset(bool silent)
     {
         mAutoSave  = false;
