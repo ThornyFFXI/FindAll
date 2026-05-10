@@ -3881,6 +3881,9 @@
 		<item offset="70" id="22165" />	<!--Ethereal Gun-->
 		<item offset="71" id="20655" />	<!--Archduke's Sword-->
 		<item offset="72" id="26417" />	<!--Archduke's Shield-->
+		<item offset="73" id="24272" />	<!--Suzaku Cap-->
+		<item offset="74" id="3756" />	<!--Sachertorte-->
+		<item offset="75" id="21950" />	<!--Bud Rod-->
 	</slip>
 	<slip id="29343">		<!--Storage Slip 32-->
 		<item offset="0" id="23895" />	<!--Pumm. Mask +4-->
