@@ -451,6 +451,16 @@
 		<item offset="121" id="23864" />	<!--Magh Bihu's Masque-->
 		<item offset="122" id="23865" />	<!--Magh Bihu's Suit-->
 		<item offset="123" id="21536" />	<!--Dazbog's Knuckles-->
+		<item offset="125" id="24283" />	<!--CSM Gloves +1-->
+		<item offset="127" id="24297" />	<!--CSM Boots +1-->
+		<item offset="129" id="24284" />	<!--CSF Gloves +1-->
+		<item offset="131" id="24298" />	<!--CSF Boots +1-->
+		<item offset="133" id="24285" />	<!--MG Gauntlets +1-->
+		<item offset="135" id="24299" />	<!--MGM Ledelsens +1-->
+		<item offset="137" id="24286" />	<!--MG Gloves +1-->
+		<item offset="139" id="24300" />	<!--MGF Ledelsens +1-->
+		<item offset="141" id="24287" />	<!--WN Mittens +1-->
+		<item offset="143" id="24301" />	<!--WN Clomps +1-->
 	</slip>
 	<slip id="29315">		<!--Storage Slip 04-->
 		<item offset="0" id="12511" />	<!--Fighter's Mask-->
@@ -2872,6 +2882,7 @@
 		<item offset="188" id="23874" />	<!--Hebenus Shorts-->
 		<item offset="189" id="20691" />	<!--Kyukoto-->
 		<item offset="190" id="23893" />	<!--Dhalmel Trousers-->
+		<item offset="191" id="26522" />	<!--Tajawwul-->
 	</slip>
 	<slip id="29334">		<!--Storage Slip 23-->
 		<item offset="0" id="25659" />	<!--Sulevia's Mask-->
@@ -3884,6 +3895,10 @@
 		<item offset="73" id="24272" />	<!--Suzaku Cap-->
 		<item offset="74" id="3756" />	<!--Sachertorte-->
 		<item offset="75" id="21950" />	<!--Bud Rod-->
+		<item offset="76" id="24273" />	<!--Subu Houou Kabuto-->
+		<item offset="77" id="21874" />	<!--Abyssbringer-->
+		<item offset="78" id="21949" />	<!--Sh. Moogle Rod-->
+		<item offset="79" id="21951" />	<!--Sh. Moogle Rod +1-->
 	</slip>
 	<slip id="29343">		<!--Storage Slip 32-->
 		<item offset="0" id="23895" />	<!--Pumm. Mask +4-->
