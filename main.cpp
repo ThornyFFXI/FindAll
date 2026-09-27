@@ -45,7 +45,10 @@ bool FindAll::HandleCommand(int32_t mode, const char* command, bool injected)
 	UNREFERENCED_PARAMETER(command);
 	UNREFERENCED_PARAMETER(injected);
     std::vector<std::string> args;
-    int argCount = Ashita::Commands::GetCommandArgs(command, &args);
+    Ashita::Commands::GetCommandArgs(command, &args);
+    // A stray quote (e.g. /findall "R. Goldpiece"") yields an empty arg, which wildcards to "**" and matches everything.
+    args.erase(std::remove(args.begin(), args.end(), ""), args.end());
+    int argCount = (int)args.size();
     
 	if ((argCount > 1) && ((_stricmp(args[0].c_str(), "/fa") == 0) || (_stricmp(args[0].c_str(), "/findall") == 0)))
     {
